@@ -111,6 +111,7 @@ h3.blk{margin:0 0 10px; font-size:19px; line-height:1.1}
 /* ---------- exercise ---------- */
 .ex{border:1px solid var(--rule); background:var(--card); border-radius:var(--r-lg); margin:0 0 10px; overflow:hidden}
 .ex.core{box-shadow:inset 3px 0 0 var(--brass)}
+.ex.custom{box-shadow:inset 3px 0 0 var(--olive)}
 .ex-top{display:flex; align-items:flex-start; gap:10px; padding:12px 13px; cursor:pointer}
 .ex-top:hover{background:var(--shade)}
 .ex-nm{flex:1; min-width:0}
@@ -118,6 +119,17 @@ h3.blk{margin:0 0 10px; font-size:19px; line-height:1.1}
 .ex-nm .m{font-size:11.5px; color:var(--ink-3); letter-spacing:.03em; margin-top:3px; display:block}
 .ex-tog{font-size:19px; color:var(--ink-3); line-height:1; padding-top:2px}
 .ex.open .ex-tog{color:var(--red)}
+.ex-del{background:none; border:none; color:var(--ink-3); font-size:21px; line-height:1;
+  cursor:pointer; padding:2px 4px; margin-top:-2px}
+.ex-del:hover{color:var(--red)}
+.variant{display:flex; align-items:center; gap:9px; padding:10px 13px; border-top:1px dashed var(--rule); font-size:12.5px}
+.variant label{color:var(--ink-3); letter-spacing:.06em; text-transform:uppercase; font-size:10px; font-weight:700}
+.variant select{background:var(--sunk); color:var(--ink); border:1px solid var(--rule);
+  border-radius:var(--r-sm); padding:7px 9px; font-family:inherit; font-size:13px; flex:1; min-width:0}
+.addex{margin-top:6px}
+.addex-in{display:block; width:100%; background:var(--sunk); border:1px solid var(--rule); color:var(--ink);
+  padding:10px; font-size:15px; font-family:inherit; border-radius:var(--r-sm); margin-top:8px}
+.addex-in:first-of-type{margin-top:0}
 .pres{display:flex; flex-wrap:wrap; gap:0; border-top:1px solid var(--rule)}
 .pres div{flex:1; min-width:64px; padding:8px 6px; text-align:center; border-right:1px solid var(--rule)}
 .pres div:last-child{border-right:none}
@@ -311,6 +323,8 @@ h3.blk{margin:0 0 10px; font-size:19px; line-height:1.1}
 .qr.core .nm:after{content:"core"; font-size:9px; letter-spacing:.1em; text-transform:uppercase;
   color:var(--brass); margin-left:7px; font-weight:700}
 .qr-b{display:none} .qr.open .qr-b{display:block}
+.qr.static .qr-t{cursor:default}
+.qr.static .qr-t:hover{background:none}
 .todo{display:flex; align-items:center; gap:11px; padding:12px; border:1px solid var(--rule);
   background:var(--card); border-radius:var(--r-md); margin:0 0 7px}
 .todo .tx{flex:1; min-width:0}
@@ -351,6 +365,7 @@ h3.blk{margin:0 0 10px; font-size:19px; line-height:1.1}
 
   <section class="tab on" id="t-today"></section>
   <section class="tab" id="t-train"></section>
+  <section class="tab" id="t-core"></section>
   <section class="tab" id="t-combat"></section>
   <section class="tab" id="t-mobility"></section>
   <section class="tab" id="t-body"></section>
@@ -372,7 +387,7 @@ h3.blk{margin:0 0 10px; font-size:19px; line-height:1.1}
 /* ================= STORAGE =================
    localStorage first (that's what you get when the file runs on your phone),
    with an in-memory fallback so nothing crashes if a browser blocks it. */
-var K={logs:"fc_logs",runs:"fc_runs",tests:"fc_tests",done:"fc_done",goals:"fc_goals",theme:"fc_theme"};
+var K={logs:"fc_logs",runs:"fc_runs",tests:"fc_tests",done:"fc_done",goals:"fc_goals",theme:"fc_theme",variants:"fc_variants",custom:"fc_custom"};
 var Store=(function(){
   var ok=false, mem={};
   try{localStorage.setItem("__fc","1");localStorage.removeItem("__fc");ok=true;}catch(e){ok=false;}
@@ -394,7 +409,9 @@ var DB={
   runs:  Store.get(K.runs,[]),    // {ts,date,mins,note}
   tests: Store.get(K.tests,{}),   // {"2026-07":{bw,run,push,plank,jump,shuttle}}
   done:  Store.get(K.done,[]),    // {ts,date,type} session completions
-  goals: Store.get(K.goals,{})    // {exId:target}
+  goals: Store.get(K.goals,{}),   // {exId:target}
+  variants: Store.get(K.variants,{}), // {exId: chosen variation label}
+  custom: Store.get(K.custom,{})  // {dayKey:[{id,name,sets,reps,custom:true}]}
 };
 function save(k){Store.set(K[k],DB[k]);}
 
@@ -546,10 +563,11 @@ var PROGRAM=[
   prog:"Double progression 12→20.",
   why:"Strong, mobile adductors mean groin durability, better knee tracking and real control of kicks and level changes."},
  {id:"leg_standingcalf",name:"Standing Calf Raise",musc:"Calves — gastrocnemius",sets:"4",reps:"8–15",rir:"0–2",rest:"60–90s",tempo:"2-2-1",
+  variants:["Standing calf machine","Toe press on the leg press","Single-leg raise off a bench or step"],
   cues:["Knees straight to bias the gastroc. Full stretch at the bottom, all the way onto the big toe.","Pause top and bottom — no Achilles bouncing."],
   bad:["Bouncing.","Partial range, or bent knees which shift it to the soleus."],
   prog:"Double progression 8→15.",
-  why:"Straight knees target the visible calf, and it pairs with seated work on Lower for the soleus. Ankle stiffness is free speed in a stance."},
+  why:"Straight knees target the visible calf, and it pairs with seated work on Lower for the soleus. Ankle stiffness is free speed in a stance. No calf machine free? The leg press and a bench both load the same range — pick a variation above and it's remembered here."},
  {id:"leg_tib",name:"Tibialis Raise",musc:"Tibialis — shins",sets:"3",reps:"15–25",rir:"0–1",rest:"45–60s",tempo:"2-1-2",
   cues:["Heels on a plate or back against a wall. Pull the toes up toward the shins as far as they go, then squeeze.","Control the way down."],
   bad:["Tiny range.","Bodyweight momentum."],
@@ -568,7 +586,7 @@ var PROGRAM=[
 ]},
 
 {key:"upper",name:"Upper",sub:"Arms · shoulders · chest · back",
- focus:"Fixed order — biceps, triceps, shoulders, chest, then back, rear delts and forearms.",ex:[
+ focus:"Fixed order — biceps, triceps, shoulders, chest, then back and rear delts.",ex:[
  {id:"upr_preacher",name:"Preacher Curl (EZ bar or machine)",musc:"Biceps — short head",sets:"3",reps:"8–12",rir:"1–2",rest:"90s",tempo:"2-1-2",
   cues:["Upper arms flat on the pad — don't let the elbows slide up. Full contraction at the top.","Control the negative; don't crash into the bottom stretch."],
   bad:["Coming off the pad to cheat.","Bouncing out of the bottom, half reps at the top."],
@@ -579,36 +597,56 @@ var PROGRAM=[
   bad:["Elbow drifting forward.","Using the shoulder and losing the behind-body position."],
   prog:"Double progression 10→12.",
   why:"Cable keeps tension through the whole range where dumbbells lose it at the top, and the behind-body angle stretches the long head."},
+ {id:"upr_satricep",name:"Single-Arm Overhead Triceps Extension",musc:"Triceps — long head, unilateral",sets:"3",reps:"10–15 / arm",rir:"1–2",rest:"75–90s",tempo:"3-0-1",
+  cues:["Upper arm tight to your ear, elbow pointing at the ceiling. Lower the dumbbell behind your head to a full stretch, then extend without the elbow drifting out.","Brace the free hand against your ribs or the working elbow to keep it pinned."],
+  bad:["Elbow flaring wide as the weight drops.","Turning it into a shoulder movement by swinging the upper arm forward."],
+  prog:"Double progression 10→15 per arm, then step the dumbbell up.",
+  why:"One arm at a time closes any left-right strength gap and actually reaches the deep stretch the JM press only gets halfway to. Goes first, while the elbow is fresh enough to own the position, before the heavier press."},
  {id:"upr_jm",name:"Smith Machine JM Press",musc:"Triceps — long head under load",sets:"3",reps:"8–12",rir:"1–2",rest:"90s–2 min",tempo:"3-0-1",
   cues:["Lie as for a close-grip bench, hands about shoulder-width. Lower the bar toward the upper chest and throat line while letting the elbows travel forward — halfway between a close-grip press and a skullcrusher.","Stop when the forearms are near the biceps, then drive back up. Keep the elbows in line with the bar path, not flared."],
   bad:["Turning it into a pure close-grip bench by keeping the upper arms vertical.","Letting the bar drift over the face like a skullcrusher, which loads the elbow rather than the muscle.","Going heavy before the groove is learned — this one rewards practice at moderate load."],
   prog:"Double progression 8→12, then add the smallest plate available and reset to 8.",
   why:"Replaces the skullcrusher. You get the same stretched long-head position but the load is shared with a pressing pattern, so the elbows take far less strain — and on a Smith machine the bar path is fixed, so you can push near failure alone and learn the groove safely."},
+ {id:"upr_ohp",name:"Seated Dumbbell Shoulder Press",musc:"Delts — front and side",sets:"3",reps:"6–10",rir:"1–2",rest:"2–2.5 min",tempo:"2-0-1",
+  cues:["Forearms vertical, press to just short of lockout, control down to ear level.","Brace the core; don't overarch to finish the rep."],
+  bad:["Overarching until it turns into an incline press.","Letting the dumbbells drift behind the head."],
+  prog:"Double progression 6→10, then step the dumbbells up.",
+  why:"A second weekly overhead session gives the front delts direct load pressing days alone don't provide, and leads the shoulder block here while you still have the strength to press heavy."},
  {id:"upr_lateral",name:"Dumbbell Lateral Raise",musc:"Side delts",sets:"4",reps:"12–20",rir:"0–1",rest:"60–90s",tempo:"2-0-2",
   cues:["Lead with the elbows, control down, no swing. Slight forward lean, constant tension.","Don't rest at the bottom of each rep."],
   bad:["Momentum and traps.","Going above shoulder height."],
   prog:"Double progression 12→20, micro-load.",
   why:"Second weekly side-delt session. Highest return per set for shoulder width and it thrives on frequency."},
+ {id:"upr_frontraise",name:"Dumbbell Front Raise",musc:"Delts — front",sets:"3",reps:"12–15",rir:"0–1",rest:"60–75s",tempo:"2-0-2",
+  cues:["Raise to eye level with a soft bend in the elbow, thumbs slightly up.","Control the descent — don't let the dumbbells fall past the front of your thighs."],
+  bad:["Swinging from the hips or shrugging to start the rep.","Raising past shoulder height, which shifts load onto the traps."],
+  prog:"Double progression 12→15, micro-load.",
+  why:"Direct front-delt isolation to round out the shoulder press. The front delt already works hard on every push day, so this stays light and short."},
  {id:"upr_incmachine",name:"Incline Machine / Smith Press",musc:"Chest — upper",sets:"3",reps:"8–12",rir:"1–2",rest:"2 min",tempo:"2-1-2",
   cues:["Bench around 30°, shoulder blades retracted, press over the upper chest.","Full controlled range."],
   bad:["Bench too steep.","Half reps, shoulders rolling forward."],
   prog:"Double progression 8→12.",
   why:"A second upper-chest session on a stable path so you can push hard this late in the day. Swap to a flat press if mid-chest starts lagging."},
+ {id:"upr_midflye",name:"Mid-Chest Cable Fly",musc:"Chest — mid, isolation",sets:"3",reps:"12–15",rir:"0–1",rest:"75–90s",tempo:"2-1-2",
+  cues:["Cables set at shoulder height, slight forward lean, soft fixed elbows.","Sweep the hands together in front of the sternum and squeeze; feel the stretch on the way back."],
+  bad:["Pressing instead of flying as the elbows bend more.","Bouncing out of the stretched position."],
+  prog:"Double progression 12→15.",
+  why:"Fills in the mid-chest that the two incline-biased presses leave short, in the fully shortened position with constant cable tension a dumbbell fly can't hold at the top."},
+ {id:"upr_pullup",name:"Pull-Up",musc:"Lats — width, second session",sets:"3",reps:"6–12",rir:"1–2",rest:"2 min",tempo:"2-1-1",
+  cues:["Full hang to start, ribcage up, drive the elbows down and back toward your hips.","Chin clears the bar under control — no kipping."],
+  bad:["Half reps that stop short of a full hang.","Swinging the legs to generate momentum."],
+  prog:"Add reps 6→12, then add a weight belt and reset to 6.",
+  why:"A second weekly width session for the lats, led into the row while your grip and back are still fresh. Use an assisted machine or a band if you can't yet do the reps unweighted."},
  {id:"upr_csrow",name:"Chest-Supported Row",musc:"Back — thickness",sets:"4",reps:"8–12",rir:"1–2",rest:"2 min",tempo:"2-1-2",
   cues:["Chest on the pad, row to the lower ribs, retract and depress, one-second squeeze.","Strict even at the end of a long session."],
   bad:["Heaving.","High elbow flare, short range."],
   prog:"Double progression 8→12.",
-  why:"Second back-thickness session, kept spine-friendly this late in the day. With Pull-day pulldowns your back gets balanced width and thickness twice weekly."},
- {id:"upr_reardelt",name:"Reverse Pec-Deck",musc:"Rear delts",sets:"3",reps:"15–20",rir:"0–1",rest:"60–90s",tempo:"2-1-1",
-  cues:["Lead with the elbows, spread wide, traps relaxed.","Clean line of pull, no rowing."],
-  bad:["Rowing or using momentum.","Too heavy."],
+  why:"Second back-thickness session, kept spine-friendly this late in the day. With Pull-day pulldowns and the pull-up above, your back gets balanced width and thickness twice weekly."},
+ {id:"upr_facepull",name:"Face Pull",musc:"Rear delts",sets:"3",reps:"15–20",rir:"0–1",rest:"60–90s",tempo:"2-1-1",
+  cues:["Rope to the face, pull the hands apart and finish with the thumbs pointing back — external rotation at the end, not just a row.","Elbows stay high, roughly level with the shoulders."],
+  bad:["Pulling low into the chest like a row, which loses the rear-delt and rotator-cuff bias.","Too heavy, so the finish turns into a shrug."],
   prog:"Double progression 15→20.",
-  why:"Second rear-delt session for posture, shoulder balance and healthy shoulders under all your pressing."},
- {id:"upr_wristcurl",name:"Wrist Curl",musc:"Forearm flexors",sets:"3",reps:"15–20",rir:"0–1",rest:"45–60s",tempo:"2-1-2",
-  cues:["Forearms supported, wrists off the edge. Let the bar roll to the fingertips for a full stretch, then curl and squeeze.","Controlled throughout."],
-  bad:["Tiny range.","So heavy it only moves an inch."],
-  prog:"Double progression 15→20.",
-  why:"Balances the reverse-curl extensor work for complete, injury-resistant forearms and grip. Last, so grip fatigue doesn't limit your pulling earlier."}
+  why:"Second weekly rear-delt and external-rotation session — swapped in for the reverse pec-deck because the finish also trains the rotator cuff, which matters more for shoulder health under repeated pressing than an isolated rear-delt fly does."}
 ]},
 
 {key:"lower",name:"Lower",sub:"Quads · hamstrings · calves · core",
@@ -634,6 +672,7 @@ var PROGRAM=[
   prog:"Double progression 10→15, then hold a plate and reset.",
   why:"New, and the reason hamstring volume now matches quads at 14 sets. It loads hip extension in a shortened range where the RDL is weakest, so hip extension and knee flexion end the week at 7 sets each."},
  {id:"lwr_seatedcalf",name:"Seated Calf Raise",musc:"Calves — soleus",sets:"4",reps:"10–20",rir:"0–2",rest:"60–90s",tempo:"2-2-1",
+  variants:["Seated calf machine","Bent-knee toe press on the leg press"],
   cues:["Knees bent to 90° to target the soleus, pad on the lower thigh.","Full stretch at the bottom, all the way onto the toes, pause at both ends."],
   bad:["Bouncing.","Partial range."],
   prog:"Double progression 10→20.",
@@ -744,6 +783,11 @@ var MOBILITY={
     "Standing side bends with an overhead reach — 8 per side, lengthening the whole flank rather than folding at the waist.",
     "Slip practice — 2 × 30s. Feet planted, bend the knees and move the head off the centre line left and right, torso rotating with it. Slipping is a lower-body and thoracic movement; if it comes from the neck you're just moving your head.",
     "Thoracic rotation on all fours — 8 per side, hand behind the head, elbow up and under."]},
+   {name:"Pelvis control",tag:"4 min",items:[
+    "Supine posterior pelvic tilt — 3 × 10, low back pressed flat into the floor on the exhale, hold 3 seconds, release. This is the position that opens the hip flexor stretches above.",
+    "Standing pelvic tilts — 10 slow, rocking through anterior and posterior tilt to find neutral. Do this before the front-split and middle-split tracks, not after.",
+    "Kneeling hip flexor stretch with an active posterior tilt — 45s per side, squeezing the glute of the rear leg to tuck the pelvis under rather than just leaning forward.",
+    "Glute bridge with a pelvic tilt hold — 3 × 10, tuck the pelvis before driving the hips up, hold the top for 2 seconds."]},
    {name:"Shoulders, arms & wrists",tag:"4 min",items:[
     "Band pass-throughs — 10, as narrow a grip as you can hold without pain.",
     "Shoulder CARs — 3 per side, slow.",
@@ -947,35 +991,17 @@ function renderTrain(){
   head.appendChild(el("span","focus",day.focus));
   root.appendChild(head);
 
-  day.ex.forEach(function(x){
-    var c=el("div","ex"+(x.core?" core":""));
-    var top=el("div","ex-top");
-    var nm=el("div","ex-nm");
-    nm.appendChild(el("span","n dsp",esc(x.name)));
-    nm.appendChild(el("span","m",(x.core?"CORE · ":"")+esc(x.musc)));
-    top.appendChild(nm);
-    top.appendChild(el("span","ex-tog","+"));
-    top.onclick=function(){c.classList.toggle("open"); top.querySelector(".ex-tog").textContent=c.classList.contains("open")?"–":"+";};
-    c.appendChild(top);
+  day.ex.forEach(function(x){ root.appendChild(exCard(x)); });
 
-    var p=el("div","pres");
-    [["Sets",x.sets,"hot"],["Reps",x.reps,""],["RIR",x.rir,""],["Rest",x.rest,""],["Tempo",x.tempo,""]].forEach(function(f){
-      var d2=el("div"); d2.appendChild(el("div","k",f[0]));
-      d2.appendChild(el("div","v num "+f[2],esc(f[1]))); p.appendChild(d2);
-    });
-    c.appendChild(p);
-
-    var det=el("div","detail");
-    det.appendChild(fld("Execution","cue",x.cues));
-    det.appendChild(fld("Common mistakes","err",x.bad));
-    det.appendChild(fld("Progression","prg",x.prog));
-    det.appendChild(fld("Why it's here","why",x.why));
-    c.appendChild(det);
-
-    c.appendChild(logInputs(x.id));
-    c.appendChild(histRows(x.id,3));
-    root.appendChild(c);
+  (DB.custom[activeDay]||[]).forEach(function(x){
+    root.appendChild(exCard(x,{onRemove:function(){removeCustom(activeDay,x.id);}}));
   });
+
+  var addBtn=el("button","btn ghost full","+ Add an exercise to "+day.name);
+  addBtn.style.marginTop="6px";
+  addBtn.onclick=function(){ openAddExercise(root,activeDay); addBtn.style.display="none"; };
+  root.appendChild(addBtn);
+
   wireTimer();
 }
 function fld(label,cls,content){
@@ -985,6 +1011,89 @@ function fld(label,cls,content){
     var ul=el("ul"); content.forEach(function(i){ul.appendChild(el("li",null,esc(i)));}); f.appendChild(ul);
   } else f.appendChild(el("p",null,esc(content)));
   return f;
+}
+/* a single exercise card — used on Train and on Core. x.custom marks a user-added move
+   (no cues/bad/prog/why); x.variants renders an equipment-variation picker that's remembered per exercise. */
+function exCard(x,opts){
+  opts=opts||{};
+  var c=el("div","ex"+(x.core?" core":"")+(x.custom?" custom":""));
+  var top=el("div","ex-top");
+  var nm=el("div","ex-nm");
+  nm.appendChild(el("span","n dsp",esc(x.name)));
+  nm.appendChild(el("span","m",(x.core?"CORE · ":"")+esc(x.musc||(x.custom?"Added by you":""))));
+  top.appendChild(nm);
+  if(x.custom){
+    var del=el("button","ex-del","×");
+    del.onclick=function(ev){ev.stopPropagation(); opts.onRemove&&opts.onRemove();};
+    top.appendChild(del);
+  }
+  top.appendChild(el("span","ex-tog","+"));
+  top.onclick=function(){c.classList.toggle("open"); top.querySelector(".ex-tog").textContent=c.classList.contains("open")?"–":"+";};
+  c.appendChild(top);
+
+  var p=el("div","pres");
+  [["Sets",x.sets,"hot"],["Reps",x.reps,""],["RIR",x.rir,""],["Rest",x.rest,""],["Tempo",x.tempo,""]].forEach(function(f){
+    if(!f[1])return;
+    var d2=el("div"); d2.appendChild(el("div","k",f[0]));
+    d2.appendChild(el("div","v num "+f[2],esc(f[1]))); p.appendChild(d2);
+  });
+  c.appendChild(p);
+
+  if(x.cues||x.bad||x.prog||x.why){
+    var det=el("div","detail");
+    if(x.cues)det.appendChild(fld("Execution","cue",x.cues));
+    if(x.bad)det.appendChild(fld("Common mistakes","err",x.bad));
+    if(x.prog)det.appendChild(fld("Progression","prg",x.prog));
+    if(x.why)det.appendChild(fld("Why it's here","why",x.why));
+    c.appendChild(det);
+  }
+
+  if(x.variants){
+    var vwrap=el("div","variant");
+    vwrap.appendChild(el("label",null,"Variation"));
+    var vsel=el("select");
+    x.variants.forEach(function(vn){var opt=el("option",null,esc(vn)); opt.value=vn; vsel.appendChild(opt);});
+    vsel.value=DB.variants[x.id]||x.variants[0];
+    vsel.onchange=function(){DB.variants[x.id]=vsel.value; save("variants"); toast("Variation set.");};
+    vwrap.appendChild(vsel);
+    c.appendChild(vwrap);
+  }
+
+  c.appendChild(logInputs(x.id));
+  c.appendChild(histRows(x.id,3));
+  return c;
+}
+function removeCustom(dayKey,id){
+  confirmBox("Remove exercise","Take this off "+dayKey+"? Anything already logged for it stays in your history.","Remove").then(function(ok){
+    if(!ok)return;
+    DB.custom[dayKey]=(DB.custom[dayKey]||[]).filter(function(x){return x.id!==id;});
+    save("custom");
+    toast("Removed."); renderTrain();
+  });
+}
+function openAddExercise(root,dayKey){
+  var f=el("div","card addex");
+  f.appendChild(el("h3","blk dsp","Add an exercise"));
+  var ni=el("input","addex-in"); ni.type="text"; ni.placeholder="Exercise name";
+  var si=el("input","addex-in"); si.type="text"; si.placeholder="Sets, e.g. 3";
+  var ri=el("input","addex-in"); ri.type="text"; ri.placeholder="Reps, e.g. 8–12";
+  f.appendChild(ni); f.appendChild(si); f.appendChild(ri);
+  var row=el("div","row"); row.style.marginTop="10px"; row.style.display="flex"; row.style.gap="8px";
+  var saveBtn=el("button","btn sm","Add");
+  saveBtn.onclick=function(){
+    var name=ni.value.trim(); if(!name){ni.style.outline="2px solid var(--red)";return;}
+    if(!DB.custom[dayKey])DB.custom[dayKey]=[];
+    DB.custom[dayKey].push({id:"custom_"+Date.now()+"_"+Math.floor(Math.random()*1000),
+      name:name,sets:si.value.trim()||"3",reps:ri.value.trim()||"8–12",custom:true});
+    save("custom");
+    toast("Added to "+dayKey+"."); renderTrain();
+  };
+  var cancelBtn=el("button","btn ghost sm","Cancel");
+  cancelBtn.onclick=function(){renderTrain();};
+  row.appendChild(saveBtn); row.appendChild(cancelBtn);
+  f.appendChild(row);
+  root.appendChild(f);
+  ni.focus();
 }
 
 /* rest timer */
@@ -1143,6 +1252,91 @@ function ladderCard(p,back){
       c.appendChild(tier);
     });
     return c;
+}
+
+/* ================= CORE — obliques, deep brace, the visible stuff ================= */
+var CORE={
+  intro:"Direct ab and oblique sets already happen inside Legs and Lower — this is where all of it lives to log in one place, plus the extra work that rounds it out. Aesthetics is loaded, visible-muscle training: crunches, twists, rotation. Deep core is bracing and anti-movement — it doesn't show in the mirror, but it's what keeps the spine safe and lets force actually transfer through the trunk instead of leaking out of it. Two or three of these on a lifting day, or run the whole page as a short standalone finisher.",
+  aesthetic:[
+   {id:"core_russiantwist",name:"Weighted Russian Twist",musc:"Obliques — rotation",sets:"3",reps:"12–15 / side",rir:"0–1",rest:"60s",tempo:"2-0-2",core:true,
+    cues:["Lean back to about 45°, feet down or lifted for more difficulty. Rotate from the ribcage and tap the weight down beside your hip.","Keep the chest tall — don't round the spine to fake the range."],
+    bad:["Rounding the spine and yanking with the arms instead of rotating the trunk.","Moving so fast the weight just swings."],
+    prog:"Double progression 12→15 per side, then step the weight up.",
+    why:"Loaded rotation trains the obliques directly — the muscle group that actually shows the line down the side of a visible midsection."},
+   {id:"core_woodchop",name:"Cable Woodchopper",musc:"Obliques — rotation, high-to-low",sets:"3",reps:"10–12 / side",rir:"0–1",rest:"60–75s",tempo:"2-0-2",core:true,
+    cues:["Cable set high, stand side-on, pull down and across the body by rotating the torso and hips together.","Arms stay relatively straight — the trunk does the rotating, not the shoulders."],
+    bad:["Just moving the arms while the hips and ribcage stay square.","So much weight the rotation shortens."],
+    prog:"Double progression 10→12 per side, then load.",
+    why:"Trains rotation through a full diagonal range under constant tension, which mirrors how a punch or a throw actually loads the trunk."},
+   {id:"core_declinesitup",name:"Weighted Decline Sit-Up",musc:"Rectus abdominis — full range",sets:"3",reps:"10–15",rir:"0–1",rest:"60–75s",tempo:"2-1-2",core:true,
+    cues:["Hold a plate at your chest, curl from the bottom of the spine up one vertebra at a time.","Control the descent all the way back down — don't drop."],
+    bad:["Yanking up with the hip flexors and neck.","Using the arms to throw the plate up."],
+    prog:"Double progression 10→15, then add plate weight.",
+    why:"The loadable full-range sit-up — where the cable crunch trains the top half, this trains the whole spinal-flexion range and takes external load."},
+   {id:"core_sideplankreach",name:"Side Plank with Reach-Under",musc:"Obliques — anti-lateral flexion + rotation",sets:"3",reps:"8–12 / side",rir:"0–1",rest:"45–60s",tempo:"slow",core:true,
+    cues:["Side plank on the forearm, hips lifted and stacked. Thread the top arm under your torso, rotating from the ribs, then open back up to the ceiling.","Keep the hips up the whole time — don't let them sag as you reach."],
+    bad:["Hips dropping toward the floor during the reach.","Rushing the rotation instead of controlling it."],
+    prog:"Double progression 8→12 per side, then hold a light plate in the reaching hand.",
+    why:"Combines the anti-lateral-flexion of a side plank with a rotational component, so the obliques get worked in two directions in the same set."}
+  ],
+  deep:[
+   {id:"core_deadbug",name:"Dead Bug",musc:"Deep core — anti-extension, coordination",sets:"3",reps:"8–10 / side",rir:"1–2",rest:"45–60s",tempo:"slow",core:true,
+    cues:["Lower back pinned flat into the floor the entire set. Extend the opposite arm and leg slowly, keeping the ribs down.","Only go as far as you can hold the low back flat — range comes later, not now."],
+    bad:["Low back arching off the floor as the leg extends.","Moving fast to get through the reps instead of controlling each one."],
+    prog:"Once the low back stays flat for all reps, extend the leg further, then add a light band or ankle weight.",
+    why:"Teaches the deep core to brace against limb movement without the spine moving — the same skill that keeps your trunk stiff when someone drives into you."},
+   {id:"core_birddog",name:"Bird Dog",musc:"Deep core — anti-rotation, spinal stability",sets:"3",reps:"8–10 / side",rir:"1–2",rest:"45–60s",tempo:"slow",core:true,
+    cues:["On all fours, brace before you move. Extend the opposite arm and leg to a dead-flat line without the hips or shoulders rotating.","Hold a beat at full extension, then return with control."],
+    bad:["Hips rocking open as the leg lifts.","Arching the low back to get the leg higher."],
+    prog:"Add a 2–3 second hold at extension, then a light band around the working hand and foot.",
+    why:"Anti-rotation and anti-extension in one movement, and it carries straight over to staying stable on one base — a stance, a sprawl, a single supporting leg."},
+   {id:"core_plank",name:"Front Plank",musc:"Deep core — anti-extension, full brace",sets:"3",reps:"30–60s",rir:"0–1",rest:"45–60s",tempo:"hold",core:true,
+    cues:["Forearms down, straight line from shoulders to ankles. Squeeze the glutes and brace the abs like you're about to be hit.","Ribs pulled down, not flared toward the ceiling."],
+    bad:["Hips sagging or piking up to relieve tension.","Holding the breath instead of breathing through the brace."],
+    prog:"Once you clear 60s with perfect form, add a plate on the back, or lift one foot off the floor.",
+    why:"The baseline whole-trunk brace everything else on this page builds on — if this breaks down under load, nothing loaded on top of it is safe."},
+   {id:"core_suitcase",name:"Suitcase Carry",musc:"Deep core — anti-lateral flexion",sets:"3",reps:"30–40m / side",rir:"0–1",rest:"60–90s",tempo:"walk",core:true,
+    cues:["Heavy dumbbell or kettlebell in one hand, walk tall without letting the torso lean toward the weight.","Shoulders level, ribs stacked over the hips the whole way."],
+    bad:["Leaning away from the load instead of resisting it with the obliques.","Short, fast steps that turn it into a sprint rather than a controlled carry."],
+    prog:"Add distance first, then step up the load.",
+    why:"Trains the core to resist side-bending under real, offset load — the same job it does every time you're off-balance in a scramble."}
+  ]
+};
+function renderCore(){
+  var root=document.getElementById("t-core"); root.innerHTML="";
+  root.appendChild(el("p","eyebrow","Abs · obliques · the deep brace"));
+  root.appendChild(el("h2","sec dsp","Core"));
+  root.appendChild(el("p","lede",CORE.intro));
+
+  var already=[];
+  PROGRAM.forEach(function(d){ d.ex.forEach(function(x){ if(x.core) already.push(x); }); });
+  if(already.length){
+    var h1=el("h3","blk dsp","Already on your training days");
+    h1.style.margin="4px 0 10px";
+    root.appendChild(h1);
+    root.appendChild(el("p","lede","Same exercises, same log history as Legs and Lower — logging here or there writes to the same place."));
+    already.forEach(function(x){ root.appendChild(exCard(x)); });
+  }
+
+  var h2=el("h3","blk dsp","Aesthetics — visible ab & oblique work");
+  h2.style.margin="26px 0 10px";
+  root.appendChild(h2);
+  root.appendChild(el("p","lede","Loaded, visible-muscle training. This is what shows through the skin."));
+  CORE.aesthetic.forEach(function(x){ root.appendChild(exCard(x)); });
+
+  var h3e=el("h3","blk dsp","Deep core — brace & anti-movement");
+  h3e.style.margin="26px 0 10px";
+  root.appendChild(h3e);
+  root.appendChild(el("p","lede","Doesn't show in the mirror. This is what keeps the spine safe and lets force transfer through the trunk instead of leaking out of it."));
+  CORE.deep.forEach(function(x){ root.appendChild(exCard(x)); });
+
+  var lh=el("div"); lh.style.margin="26px 0 12px";
+  lh.appendChild(el("p","eyebrow","Bodyweight progression"));
+  lh.appendChild(el("h3","blk dsp","Core calisthenics ladder"));
+  lh.appendChild(el("p","lede","The hollow hold, L-sit and dragon flag progression from Bodyweight, so loaded and unloaded core work live in the same place."));
+  root.appendChild(lh);
+  var coreLadder=BODYWEIGHT.patterns.filter(function(p){return p.key==="bw_core";})[0];
+  if(coreLadder)root.appendChild(ladderCard(coreLadder,renderCore));
 }
 
 /* ================= RUN ================= */
@@ -1602,24 +1796,20 @@ function renderToday(){
  }
  root.appendChild(sw);
 
- /* quick log rows */
+ /* session summary — read-only; all logging happens on the Train tab */
  if(day){
-  day.ex.forEach(function(x){
-   var q=el("div","qr"+(x.core?" core":""));
+  var todayEx=day.ex.concat(DB.custom[day.key]||[]);
+  todayEx.forEach(function(x){
+   var q=el("div","qr static"+(x.core?" core":""));
    var t=el("div","qr-t");
    t.appendChild(el("span","nm",esc(x.name)));
    var lt=lastTop(x.id);
-   t.appendChild(el("span","tgt",x.sets+" × "+x.reps));
+   t.appendChild(el("span","tgt",(x.sets||"—")+" × "+(x.reps||"—")));
    t.appendChild(el("span","last"+(lt?"":" none"),lt?lt.txt:"—"));
-   t.onclick=function(){q.classList.toggle("open");};
    q.appendChild(t);
-   var b=el("div","qr-b");
-   b.appendChild(logInputs(x.id));
-   b.appendChild(histRows(x.id,3));
-   q.appendChild(b);
    root.appendChild(q);
   });
-  var open=el("button","btn ghost full","Open the full session");
+  var open=el("button","btn full","Log this session");
   open.style.marginTop="6px";
   open.onclick=function(){activeDay=day.key; switchTab("train");};
   root.appendChild(open);
@@ -1650,7 +1840,7 @@ function renderToday(){
 }
 
 /* ================= NAV / INIT ================= */
-var TABS=[["today","Today",renderToday],["train","Train",renderTrain],["combat","Combat",renderCombat],["mobility","Flexibility",renderMobility],
+var TABS=[["today","Today",renderToday],["train","Train",renderTrain],["core","Core",renderCore],["combat","Combat",renderCombat],["mobility","Flexibility",renderMobility],
           ["body","Bodyweight",renderBody],["run","Run",renderRun],["progress","Progress",renderProgress],
           ["method","Method",renderMethod]];
 var current="today";

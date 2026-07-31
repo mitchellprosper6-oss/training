@@ -454,6 +454,11 @@ function confirmBox(title,body,okLabel){
 var PROGRAM=[
 {key:"pull",name:"Pull",sub:"Back · rear delts · traps · biceps",
  focus:"Back width and thickness, rear delts, traps, biceps and forearms.",ex:[
+ {id:"pul_pullup",name:"Pull-Up",musc:"Lats — warm-up",sets:"2",reps:"8–12",rir:"3–4",rest:"60–90s",tempo:"2-1-1",
+  cues:["Full hang to start, ribcage up, drive the elbows down toward your hips.","Stop a few reps short of failure — this is priming the pattern, not the main event."],
+  bad:["Grinding to failure here and blunting the pulldown that follows.","Kipping or swinging to get more reps."],
+  prog:"Keep RIR at 3–4. Add reps or a light band-assist as needed — this slot isn't meant to progress hard.",
+  why:"Warms up the same vertical-pull pattern the pulldown loads harder right after, grooving grip, scapular retraction and lat engagement before the working sets. Kept short and sub-maximal on purpose."},
  {id:"pul_pulldown",name:"Wide-Grip Lat Pulldown",musc:"Lats — width",sets:"4",reps:"8–12",rir:"1–2",rest:"2–2.5 min",tempo:"2-1-2",
   cues:["Drive the elbows down toward your hips — sweep the bar to the upper chest rather than pulling with the hands.","Ribcage up, lean back about 15° and hold it. Full stretch overhead without shrugging into your ears."],
   bad:["Heaving the whole torso to move the stack.","Pulling behind the neck — shoulder stress, shorter range.","Dumping the eccentric instead of controlling it."],
@@ -513,6 +518,11 @@ var PROGRAM=[
   bad:["Pressing instead of flying — the elbow angle changes.","Too heavy, so you lose the arc."],
   prog:"Double progression 12→15.",
   why:"Isolates the upper pec in the fully shortened position with constant tension the dumbbell fly loses at the top."},
+ {id:"psh_hightolow",name:"High-to-Low Cable Fly",musc:"Chest — lower and mid",sets:"3",reps:"12–15",rir:"0–1",rest:"75–90s",tempo:"2-1-2",
+  cues:["Handles start high, sweep down and in toward your hips with soft fixed elbows.","Squeeze a second at the bottom, feel the stretch coming back up."],
+  bad:["Pressing instead of flying as the elbows bend more.","Too heavy, so the arc collapses into a shrug."],
+  prog:"Double progression 12→15.",
+  why:"The mirror image of the low-to-high fly — this angle biases the lower and mid chest in the fully shortened position, so between the two flies the whole pec gets isolated coverage the presses alone don't reach."},
  {id:"psh_ohp",name:"Seated Dumbbell Shoulder Press",musc:"Delts — front and side",sets:"3",reps:"6–10",rir:"1–2",rest:"2–2.5 min",tempo:"2-0-1",
   cues:["Forearms vertical, press to just short of lockout, control down to ear level.","Brace the core; don't overarch."],
   bad:["Overarching until it becomes an incline press.","Letting the dumbbells drift behind the head."],
@@ -523,11 +533,11 @@ var PROGRAM=[
   bad:["Traps and momentum taking over.","Going above shoulder height."],
   prog:"Double progression 12→20 and micro-load — laterals climb slowly.",
   why:"Side delts drive width and respond to frequency, so they get trained twice weekly here and on Upper."},
- {id:"psh_ohext",name:"Overhead Cable / DB Extension",musc:"Triceps — long head",sets:"3",reps:"10–15",rir:"1–2",rest:"90s",tempo:"3-0-1",
-  cues:["Elbows high and tucked, upper arms alongside your head. Deep stretch behind the head, then full extension.","Don't let the elbows flare wide."],
-  bad:["Elbows flaring out.","Short range with no real stretch."],
-  prog:"Double progression 10→15.",
-  why:"The long head only fully lengthens with the arms overhead. Essential for complete triceps and elbow health under heavy pressing."},
+ {id:"psh_ohext",name:"Single-Arm Overhead Cable Extension",musc:"Triceps — long head, unilateral",sets:"3",reps:"10–15 / arm",rir:"1–2",rest:"90s",tempo:"3-0-1",
+  cues:["Cable low behind you, upper arm tight to your ear, elbow high and pointing forward.","Extend fully without the elbow drifting out, then control the stretch back down."],
+  bad:["Elbow flaring wide as the cable pulls it back.","Leaning the torso to help finish the rep."],
+  prog:"Double progression 10→15 per arm, then load.",
+  why:"One arm at a time closes any left-right gap and lets you actually own the deep stretch behind the head that the long head needs — constant cable tension holds through the whole range a dumbbell loses at the top."},
  {id:"psh_pushdown",name:"Triceps Rope Pushdown",musc:"Triceps — lateral / medial",sets:"3",reps:"10–15",rir:"0–1",rest:"60–90s",tempo:"2-0-2",
   cues:["Elbows pinned to your sides. Spread the rope at the bottom and squeeze the lockout.","Control back up."],
   bad:["Elbows drifting forward or flaring.","Leaning into it; partial lockout."],
@@ -592,26 +602,11 @@ var PROGRAM=[
   bad:["Coming off the pad to cheat.","Bouncing out of the bottom, half reps at the top."],
   prog:"Double progression 8→12.",
   why:"Fixing the elbow forward biases the short head and the peak-contraction range that the incline curl's stretch doesn't cover. Placed first while your arms are fresh."},
- {id:"upr_bayesian",name:"Bayesian Cable Curl",musc:"Biceps — long head",sets:"3",reps:"10–12",rir:"1–2",rest:"75–90s",tempo:"3-0-1",
-  cues:["Face away from a low cable, elbow slightly behind the body, step forward for a deep stretch.","Curl with the elbow fixed, supinate, slow eccentric."],
-  bad:["Elbow drifting forward.","Using the shoulder and losing the behind-body position."],
-  prog:"Double progression 10→12.",
-  why:"Cable keeps tension through the whole range where dumbbells lose it at the top, and the behind-body angle stretches the long head."},
- {id:"upr_satricep",name:"Single-Arm Overhead Triceps Extension",musc:"Triceps — long head, unilateral",sets:"3",reps:"10–15 / arm",rir:"1–2",rest:"75–90s",tempo:"3-0-1",
-  cues:["Upper arm tight to your ear, elbow pointing at the ceiling. Lower the dumbbell behind your head to a full stretch, then extend without the elbow drifting out.","Brace the free hand against your ribs or the working elbow to keep it pinned."],
-  bad:["Elbow flaring wide as the weight drops.","Turning it into a shoulder movement by swinging the upper arm forward."],
-  prog:"Double progression 10→15 per arm, then step the dumbbell up.",
-  why:"One arm at a time closes any left-right strength gap and actually reaches the deep stretch the JM press only gets halfway to. Goes first, while the elbow is fresh enough to own the position, before the heavier press."},
  {id:"upr_jm",name:"Smith Machine JM Press",musc:"Triceps — long head under load",sets:"3",reps:"8–12",rir:"1–2",rest:"90s–2 min",tempo:"3-0-1",
   cues:["Lie as for a close-grip bench, hands about shoulder-width. Lower the bar toward the upper chest and throat line while letting the elbows travel forward — halfway between a close-grip press and a skullcrusher.","Stop when the forearms are near the biceps, then drive back up. Keep the elbows in line with the bar path, not flared."],
   bad:["Turning it into a pure close-grip bench by keeping the upper arms vertical.","Letting the bar drift over the face like a skullcrusher, which loads the elbow rather than the muscle.","Going heavy before the groove is learned — this one rewards practice at moderate load."],
   prog:"Double progression 8→12, then add the smallest plate available and reset to 8.",
   why:"Replaces the skullcrusher. You get the same stretched long-head position but the load is shared with a pressing pattern, so the elbows take far less strain — and on a Smith machine the bar path is fixed, so you can push near failure alone and learn the groove safely."},
- {id:"upr_ohp",name:"Seated Dumbbell Shoulder Press",musc:"Delts — front and side",sets:"3",reps:"6–10",rir:"1–2",rest:"2–2.5 min",tempo:"2-0-1",
-  cues:["Forearms vertical, press to just short of lockout, control down to ear level.","Brace the core; don't overarch to finish the rep."],
-  bad:["Overarching until it turns into an incline press.","Letting the dumbbells drift behind the head."],
-  prog:"Double progression 6→10, then step the dumbbells up.",
-  why:"A second weekly overhead session gives the front delts direct load pressing days alone don't provide, and leads the shoulder block here while you still have the strength to press heavy."},
  {id:"upr_lateral",name:"Dumbbell Lateral Raise",musc:"Side delts",sets:"4",reps:"12–20",rir:"0–1",rest:"60–90s",tempo:"2-0-2",
   cues:["Lead with the elbows, control down, no swing. Slight forward lean, constant tension.","Don't rest at the bottom of each rep."],
   bad:["Momentum and traps.","Going above shoulder height."],
@@ -627,21 +622,21 @@ var PROGRAM=[
   bad:["Bench too steep.","Half reps, shoulders rolling forward."],
   prog:"Double progression 8→12.",
   why:"A second upper-chest session on a stable path so you can push hard this late in the day. Swap to a flat press if mid-chest starts lagging."},
- {id:"upr_midflye",name:"Mid-Chest Cable Fly",musc:"Chest — mid, isolation",sets:"3",reps:"12–15",rir:"0–1",rest:"75–90s",tempo:"2-1-2",
-  cues:["Cables set at shoulder height, slight forward lean, soft fixed elbows.","Sweep the hands together in front of the sternum and squeeze; feel the stretch on the way back."],
-  bad:["Pressing instead of flying as the elbows bend more.","Bouncing out of the stretched position."],
-  prog:"Double progression 12→15.",
-  why:"Fills in the mid-chest that the two incline-biased presses leave short, in the fully shortened position with constant cable tension a dumbbell fly can't hold at the top."},
+ {id:"upr_midflye",name:"Flat Bench Press",musc:"Chest — mid",sets:"3",reps:"8–12",rir:"1–2",rest:"2–2.5 min",tempo:"2-1-1",
+  cues:["Shoulder blades pinched and pinned to the bench, slight arch, feet driven into the floor.","Bar to the mid-chest, elbows around 45–60°, press up and slightly back."],
+  bad:["Elbows flared to 90°, which stresses the shoulder.","Bouncing the bar off the chest."],
+  prog:"Double progression 8→12, then add plates and reset.",
+  why:"A second mid-chest session on a fixed bar path — swapped in for the cable fly so this slot builds raw pressing strength instead of pure isolation, complementing the two incline-biased presses earlier in the day."},
  {id:"upr_pullup",name:"Pull-Up",musc:"Lats — width, second session",sets:"3",reps:"6–12",rir:"1–2",rest:"2 min",tempo:"2-1-1",
   cues:["Full hang to start, ribcage up, drive the elbows down and back toward your hips.","Chin clears the bar under control — no kipping."],
   bad:["Half reps that stop short of a full hang.","Swinging the legs to generate momentum."],
   prog:"Add reps 6→12, then add a weight belt and reset to 6.",
   why:"A second weekly width session for the lats, led into the row while your grip and back are still fresh. Use an assisted machine or a band if you can't yet do the reps unweighted."},
- {id:"upr_csrow",name:"Chest-Supported Row",musc:"Back — thickness",sets:"4",reps:"8–12",rir:"1–2",rest:"2 min",tempo:"2-1-2",
-  cues:["Chest on the pad, row to the lower ribs, retract and depress, one-second squeeze.","Strict even at the end of a long session."],
-  bad:["Heaving.","High elbow flare, short range."],
-  prog:"Double progression 8→12.",
-  why:"Second back-thickness session, kept spine-friendly this late in the day. With Pull-day pulldowns and the pull-up above, your back gets balanced width and thickness twice weekly."},
+ {id:"upr_csrow",name:"Barbell Row",musc:"Back — thickness",sets:"4",reps:"6–10",rir:"1–2",rest:"2–2.5 min",tempo:"2-1-1",
+  cues:["Hinge to about a 45° torso angle, neutral spine, bar close to the shins.","Pull to the lower ribs, drive the elbows back, pause and squeeze before lowering under control."],
+  bad:["Standing too upright, which turns it into a shrug.","Using the lower back to heave the bar up instead of the lats and mid-back."],
+  prog:"Double progression 6→10, then add plates and reset to 6.",
+  why:"A heavier, freer bar path than the chest-supported version — more total back thickness for the same slot, now that the day leads into it off the pull-up above. Brace hard; this is the one Upper exercise that puts real load through the spine."},
  {id:"upr_facepull",name:"Face Pull",musc:"Rear delts",sets:"3",reps:"15–20",rir:"0–1",rest:"60–90s",tempo:"2-1-1",
   cues:["Rope to the face, pull the hands apart and finish with the thumbs pointing back — external rotation at the end, not just a row.","Elbows stay high, roughly level with the shoulders."],
   bad:["Pulling low into the chest like a row, which loses the rear-delt and rotator-cuff bias.","Too heavy, so the finish turns into a shrug."],
@@ -994,12 +989,15 @@ function renderTrain(){
   day.ex.forEach(function(x){ root.appendChild(exCard(x)); });
 
   (DB.custom[activeDay]||[]).forEach(function(x){
-    root.appendChild(exCard(x,{onRemove:function(){removeCustom(activeDay,x.id);}}));
+    root.appendChild(exCard(x,{
+      onRemove:function(){removeCustom(activeDay,x.id);},
+      onEdit:function(){openExerciseForm(root,activeDay,x);}
+    }));
   });
 
   var addBtn=el("button","btn ghost full","+ Add an exercise to "+day.name);
   addBtn.style.marginTop="6px";
-  addBtn.onclick=function(){ openAddExercise(root,activeDay); addBtn.style.display="none"; };
+  addBtn.onclick=function(){ openExerciseForm(root,activeDay,null); addBtn.style.display="none"; };
   root.appendChild(addBtn);
 
   wireTimer();
@@ -1023,6 +1021,9 @@ function exCard(x,opts){
   nm.appendChild(el("span","m",(x.core?"CORE · ":"")+esc(x.musc||(x.custom?"Added by you":""))));
   top.appendChild(nm);
   if(x.custom){
+    var edit=el("button","ex-del","✎");
+    edit.onclick=function(ev){ev.stopPropagation(); opts.onEdit&&opts.onEdit();};
+    top.appendChild(edit);
     var del=el("button","ex-del","×");
     del.onclick=function(ev){ev.stopPropagation(); opts.onRemove&&opts.onRemove();};
     top.appendChild(del);
@@ -1071,22 +1072,26 @@ function removeCustom(dayKey,id){
     toast("Removed."); renderTrain();
   });
 }
-function openAddExercise(root,dayKey){
+function openExerciseForm(root,dayKey,existing){
   var f=el("div","card addex");
-  f.appendChild(el("h3","blk dsp","Add an exercise"));
-  var ni=el("input","addex-in"); ni.type="text"; ni.placeholder="Exercise name";
-  var si=el("input","addex-in"); si.type="text"; si.placeholder="Sets, e.g. 3";
-  var ri=el("input","addex-in"); ri.type="text"; ri.placeholder="Reps, e.g. 8–12";
+  f.appendChild(el("h3","blk dsp",existing?"Edit exercise":"Add an exercise"));
+  var ni=el("input","addex-in"); ni.type="text"; ni.placeholder="Exercise name"; ni.value=existing?existing.name:"";
+  var si=el("input","addex-in"); si.type="text"; si.placeholder="Sets, e.g. 3"; si.value=existing?existing.sets:"";
+  var ri=el("input","addex-in"); ri.type="text"; ri.placeholder="Reps, e.g. 8–12"; ri.value=existing?existing.reps:"";
   f.appendChild(ni); f.appendChild(si); f.appendChild(ri);
   var row=el("div","row"); row.style.marginTop="10px"; row.style.display="flex"; row.style.gap="8px";
-  var saveBtn=el("button","btn sm","Add");
+  var saveBtn=el("button","btn sm",existing?"Save":"Add");
   saveBtn.onclick=function(){
     var name=ni.value.trim(); if(!name){ni.style.outline="2px solid var(--red)";return;}
     if(!DB.custom[dayKey])DB.custom[dayKey]=[];
-    DB.custom[dayKey].push({id:"custom_"+Date.now()+"_"+Math.floor(Math.random()*1000),
-      name:name,sets:si.value.trim()||"3",reps:ri.value.trim()||"8–12",custom:true});
+    if(existing){
+      existing.name=name; existing.sets=si.value.trim()||"3"; existing.reps=ri.value.trim()||"8–12";
+    }else{
+      DB.custom[dayKey].push({id:"custom_"+Date.now()+"_"+Math.floor(Math.random()*1000),
+        name:name,sets:si.value.trim()||"3",reps:ri.value.trim()||"8–12",custom:true});
+    }
     save("custom");
-    toast("Added to "+dayKey+"."); renderTrain();
+    toast(existing?"Updated.":"Added to "+dayKey+"."); renderTrain();
   };
   var cancelBtn=el("button","btn ghost sm","Cancel");
   cancelBtn.onclick=function(){renderTrain();};

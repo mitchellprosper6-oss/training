@@ -553,8 +553,8 @@ var PROGRAM=[
   why:"One arm at a time closes any left-right gap and keeps the elbow honest in a way the two-handed rope lets you cheat. Hits the lateral and medial heads in the shortened range for the horseshoe, complementing the stretched overhead work."}
 ]},
 
-{key:"legs",name:"Legs",sub:"Hamstrings · quads · calves · core",
- focus:"Hamstrings first, then quads, calves, shins, adductors and core. 8 hamstring and 7 quad sets today.",ex:[
+{key:"legs",name:"Legs",sub:"Hamstrings · quads · calves",
+ focus:"Hamstrings first, then quads, calves, shins and adductors. 8 hamstring and 7 quad sets today.",ex:[
  {id:"leg_seatedcurl",name:"Seated Leg Curl",musc:"Hamstrings — knee flexion",sets:"4",reps:"8–12",rir:"1–2",rest:"90s–2 min",tempo:"2-1-2",
   cues:["Hips pinned by the pad, torso upright. Curl fully, hold the squeeze, slow the eccentric.","Point the toes to reduce calf cramping, or dorsiflex to pull the gastroc in."],
   bad:["Hips lifting off the seat.","Momentum, half reps, slamming the weight back."],
@@ -591,16 +591,6 @@ var PROGRAM=[
   bad:["Tiny range.","Bodyweight momentum."],
   prog:"Double progression 15→25, then add a plate or a weighted boot.",
   why:"Balanced lower legs, stronger ankles and better dorsiflexion. This is the shin-splint and ankle-sprain insurance muscle."},
- {id:"leg_cablecrunch",name:"Cable Crunch",musc:"Rectus abdominis",sets:"3",reps:"10–15",rir:"0–1",rest:"60–75s",tempo:"2-1-2",core:true,
-  cues:["Kneel under a rope, hips fixed. Crunch by rounding the spine and driving the ribs toward the pelvis.","Hold the bottom a beat. Do not hinge at the hips."],
-  bad:["Pulling with the arms or hinging at the hips.","Bouncing out of the top."],
-  prog:"Double progression 10→15, then add load.",
-  why:"The abs are a muscle and grow like one — this is the loadable flexion movement that actually progresses week to week."},
- {id:"leg_pallof",name:"Pallof Press",musc:"Anti-rotation core",sets:"3",reps:"10 / side",rir:"1–2",rest:"45–60s",tempo:"2-2-2",core:true,
-  cues:["Cable at chest height, stand side-on and braced. Press straight out and resist the rotation.","Hold two seconds at full extension. Breathe."],
-  bad:["Letting the torso twist toward the stack.","Standing too close so there is no resistance to fight."],
-  prog:"Double progression 10→15 per side, then step further from the stack or add load.",
-  why:"Anti-rotation strength is what lets you transmit force from the hips into a strike instead of leaking it through the trunk. Direct carryover to everything in the Combat section."},
  {id:"leg_wristcurl",name:"Wrist Curl",musc:"Forearm flexors",sets:"3",reps:"15–20",rir:"0–1",rest:"45–60s",tempo:"2-1-2",
   cues:["Forearms supported, wrists off the edge. Let the bar roll to the fingertips for a full stretch, then curl and squeeze.","Controlled throughout."],
   bad:["Tiny range.","So heavy it only moves an inch."],
@@ -662,8 +652,8 @@ var PROGRAM=[
   why:"Balances the reverse-curl extensor work from Pull day for complete, injury-resistant forearms and grip. Last, so grip fatigue doesn't limit anything earlier in the session."}
 ]},
 
-{key:"lower",name:"Lower",sub:"Quads · hamstrings · calves · core",
- focus:"Complements Leg day — 7 quad and 6 hamstring sets, plus soleus and loaded core.",ex:[
+{key:"lower",name:"Lower",sub:"Quads · hamstrings · calves",
+ focus:"Complements Leg day — 7 quad and 6 hamstring sets, plus soleus.",ex:[
  {id:"lwr_legpress",name:"Leg Press",musc:"Quads — compound",sets:"4",reps:"8–12",rir:"1–2",rest:"2.5–3 min",tempo:"3-0-1",
   cues:["Feet mid-platform, shoulder-width for quad bias — lower and narrower means more quad.","Lower under control past 90° without the hips rounding off the seat. Don't slam the lockout."],
   bad:["Half reps.","Hips rounding at the bottom; feet too high, which shifts it to the glutes."],
@@ -689,17 +679,7 @@ var PROGRAM=[
   cues:["Knees bent to 90° to target the soleus, pad on the lower thigh.","Full stretch at the bottom, all the way onto the toes, pause at both ends."],
   bad:["Bouncing.","Partial range."],
   prog:"Double progression 10→20.",
-  why:"The bent knee isolates the soleus, which the standing raise misses. The soleus is the endurance calf — it matters for round-after-round footwork."},
- {id:"lwr_hangingleg",name:"Hanging Leg Raise",musc:"Lower abs / hip flexors",sets:"3",reps:"8–15",rir:"0–1",rest:"60–75s",tempo:"2-1-2",core:true,
-  cues:["Hang tall, then posteriorly tilt the pelvis first — curl the hips up rather than just lifting the legs.","Lower slowly and kill the swing between reps."],
-  bad:["Swinging into each rep.","Only lifting the knees without tilting the pelvis, which makes it pure hip flexor."],
-  prog:"Knees bent 8→15, then straight legs, then hold a dumbbell between the feet.",
-  why:"The strongest loaded flexion movement you can do, and hanging from the bar adds grip and shoulder-stability work at no extra cost."},
- {id:"lwr_abwheel",name:"Ab Wheel / Long-Lever Plank",musc:"Anti-extension core",sets:"3",reps:"8–12 or 30–45s",rir:"1–2",rest:"60–75s",tempo:"slow",core:true,
-  cues:["Ribs down, glutes squeezed, pelvis tucked. Roll out only as far as you can hold that position.","If the lower back arches, you have gone too far. Shorten the range."],
-  bad:["Letting the hips sag and the back arch — that trains the spine, not the abs.","Rolling out fast and using momentum to get back."],
-  prog:"Add range first, then reps 8→12. From the knees, then standing.",
-  why:"Anti-extension bracing is what holds your structure together when someone is trying to fold it. Pairs with the Pallof press on Legs day for the other half of trunk control."}
+  why:"The bent knee isolates the soleus, which the standing raise misses. The soleus is the endurance calf — it matters for round-after-round footwork."}
 ]}
 ];
 var RESTS={legs:"Rest — sleep, protein, a walk. This sits between your two hardest sessions.",
@@ -1328,8 +1308,18 @@ function ladderCard(p,back){
 
 /* ================= CORE — obliques, deep brace, the visible stuff ================= */
 var CORE={
-  intro:"Direct ab and oblique sets already happen inside Legs and Lower — this is where all of it lives to log in one place, plus the extra work that rounds it out. Aesthetics is loaded, visible-muscle training: crunches, twists, rotation. Deep core is bracing and anti-movement — it doesn't show in the mirror, but it's what keeps the spine safe and lets force actually transfer through the trunk instead of leaking out of it. Two or three of these on a lifting day, or run the whole page as a short standalone finisher.",
+  intro:"All your ab, oblique and deep-brace work lives here now, off Legs and Lower entirely, so leg days stay leg days. Aesthetics is loaded, visible-muscle training: crunches, twists, rotation. Deep core is bracing and anti-movement — it doesn't show in the mirror, but it's what keeps the spine safe and lets force actually transfer through the trunk instead of leaking out of it. Two or three of these on a lifting day, or run the whole page as a short standalone finisher.",
   aesthetic:[
+   {id:"leg_cablecrunch",name:"Cable Crunch",musc:"Rectus abdominis",sets:"3",reps:"10–15",rir:"0–1",rest:"60–75s",tempo:"2-1-2",core:true,
+    cues:["Kneel under a rope, hips fixed. Crunch by rounding the spine and driving the ribs toward the pelvis.","Hold the bottom a beat. Do not hinge at the hips."],
+    bad:["Pulling with the arms or hinging at the hips.","Bouncing out of the top."],
+    prog:"Double progression 10→15, then add load.",
+    why:"The abs are a muscle and grow like one — this is the loadable flexion movement that actually progresses week to week."},
+   {id:"lwr_hangingleg",name:"Hanging Leg Raise",musc:"Lower abs / hip flexors",sets:"3",reps:"8–15",rir:"0–1",rest:"60–75s",tempo:"2-1-2",core:true,
+    cues:["Hang tall, then posteriorly tilt the pelvis first — curl the hips up rather than just lifting the legs.","Lower slowly and kill the swing between reps."],
+    bad:["Swinging into each rep.","Only lifting the knees without tilting the pelvis, which makes it pure hip flexor."],
+    prog:"Knees bent 8→15, then straight legs, then hold a dumbbell between the feet.",
+    why:"The strongest loaded flexion movement you can do, and hanging from the bar adds grip and shoulder-stability work at no extra cost."},
    {id:"core_russiantwist",name:"Weighted Russian Twist",musc:"Obliques — rotation",sets:"3",reps:"12–15 / side",rir:"0–1",rest:"60s",tempo:"2-0-2",core:true,
     cues:["Lean back to about 45°, feet down or lifted for more difficulty. Rotate from the ribcage and tap the weight down beside your hip.","Keep the chest tall — don't round the spine to fake the range."],
     bad:["Rounding the spine and yanking with the arms instead of rotating the trunk.","Moving so fast the weight just swings."],
@@ -1352,6 +1342,16 @@ var CORE={
     why:"Combines the anti-lateral-flexion of a side plank with a rotational component, so the obliques get worked in two directions in the same set."}
   ],
   deep:[
+   {id:"leg_pallof",name:"Pallof Press",musc:"Anti-rotation core",sets:"3",reps:"10 / side",rir:"1–2",rest:"45–60s",tempo:"2-2-2",core:true,
+    cues:["Cable at chest height, stand side-on and braced. Press straight out and resist the rotation.","Hold two seconds at full extension. Breathe."],
+    bad:["Letting the torso twist toward the stack.","Standing too close so there is no resistance to fight."],
+    prog:"Double progression 10→15 per side, then step further from the stack or add load.",
+    why:"Anti-rotation strength is what lets you transmit force from the hips into a strike instead of leaking it through the trunk. Direct carryover to everything in the Combat section."},
+   {id:"lwr_abwheel",name:"Ab Wheel / Long-Lever Plank",musc:"Anti-extension core",sets:"3",reps:"8–12 or 30–45s",rir:"1–2",rest:"60–75s",tempo:"slow",core:true,
+    cues:["Ribs down, glutes squeezed, pelvis tucked. Roll out only as far as you can hold that position.","If the lower back arches, you have gone too far. Shorten the range."],
+    bad:["Letting the hips sag and the back arch — that trains the spine, not the abs.","Rolling out fast and using momentum to get back."],
+    prog:"Add range first, then reps 8→12. From the knees, then standing.",
+    why:"Anti-extension bracing is what holds your structure together when someone is trying to fold it. Pairs with the Pallof press above for the other half of trunk control."},
    {id:"core_deadbug",name:"Dead Bug",musc:"Deep core — anti-extension, coordination",sets:"3",reps:"8–10 / side",rir:"1–2",rest:"45–60s",tempo:"slow",core:true,
     cues:["Lower back pinned flat into the floor the entire set. Extend the opposite arm and leg slowly, keeping the ribs down.","Only go as far as you can hold the low back flat — range comes later, not now."],
     bad:["Low back arching off the floor as the leg extends.","Moving fast to get through the reps instead of controlling each one."],
@@ -1380,17 +1380,6 @@ function renderCore(){
   root.appendChild(el("h2","sec dsp","Core"));
   root.appendChild(el("p","lede",CORE.intro));
 
-  var already=[];
-  PROGRAM.forEach(function(d){ d.ex.forEach(function(x){ if(x.core) already.push(x); }); });
-  var alreadyVisible=already.filter(function(x){return !DB.hidden[x.id];});
-  if(alreadyVisible.length){
-    var h1=el("h3","blk dsp","Already on your training days");
-    h1.style.margin="4px 0 10px";
-    root.appendChild(h1);
-    root.appendChild(el("p","lede","Same exercises, same log history as Legs and Lower — logging here or there writes to the same place."));
-    alreadyVisible.forEach(function(x){ root.appendChild(exCard(x)); });
-  }
-
   var h2=el("h3","blk dsp","Aesthetics — visible ab & oblique work");
   h2.style.margin="26px 0 10px";
   root.appendChild(h2);
@@ -1411,7 +1400,7 @@ function renderCore(){
   var coreLadder=BODYWEIGHT.patterns.filter(function(p){return p.key==="bw_core";})[0];
   if(coreLadder)root.appendChild(ladderCard(coreLadder,renderCore));
 
-  var hc=hiddenRestoreCard("Core",already.concat(CORE.aesthetic).concat(CORE.deep));
+  var hc=hiddenRestoreCard("Core",CORE.aesthetic.concat(CORE.deep));
   if(hc)root.appendChild(hc);
 }
 

@@ -2,7 +2,7 @@
    Caches the app shell so it runs with no signal.
    IMPORTANT: bump CACHE below every time you edit index.html,
    otherwise the old cached copy keeps loading. */
-const CACHE = "training-v2";
+const CACHE = "training-v3";
 const SHELL = [
   "./",
   "./index.html",

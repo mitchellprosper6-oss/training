@@ -126,6 +126,8 @@ h3.blk{margin:0 0 10px; font-size:19px; line-height:1.1}
 .variant label{color:var(--ink-3); letter-spacing:.06em; text-transform:uppercase; font-size:10px; font-weight:700}
 .variant select{background:var(--sunk); color:var(--ink); border:1px solid var(--rule);
   border-radius:var(--r-sm); padding:7px 9px; font-family:inherit; font-size:13px; flex:1; min-width:0}
+.rename{display:flex; align-items:center; gap:8px; padding:10px 13px; border-top:1px dashed var(--rule)}
+.rename .addex-in{margin-top:0}
 .addex{margin-top:6px}
 .addex-in{display:block; width:100%; background:var(--sunk); border:1px solid var(--rule); color:var(--ink);
   padding:10px; font-size:15px; font-family:inherit; border-radius:var(--r-sm); margin-top:8px}
@@ -385,7 +387,7 @@ h3.blk{margin:0 0 10px; font-size:19px; line-height:1.1}
 /* ================= STORAGE =================
    localStorage first (that's what you get when the file runs on your phone),
    with an in-memory fallback so nothing crashes if a browser blocks it. */
-var K={logs:"fc_logs",runs:"fc_runs",tests:"fc_tests",done:"fc_done",goals:"fc_goals",theme:"fc_theme",variants:"fc_variants",custom:"fc_custom"};
+var K={logs:"fc_logs",runs:"fc_runs",tests:"fc_tests",done:"fc_done",goals:"fc_goals",theme:"fc_theme",variants:"fc_variants",custom:"fc_custom",names:"fc_names",hidden:"fc_hidden"};
 var Store=(function(){
   var ok=false, mem={};
   try{localStorage.setItem("__fc","1");localStorage.removeItem("__fc");ok=true;}catch(e){ok=false;}
@@ -409,6 +411,8 @@ var DB={
   done:  Store.get(K.done,[]),    // {ts,date,type} session completions
   goals: Store.get(K.goals,{}),   // {exId:target}
   variants: Store.get(K.variants,{}), // {exId: chosen variation label}
+  names: Store.get(K.names,{}),   // {exId: your renamed label, overrides the built-in name}
+  hidden: Store.get(K.hidden,{}), // {exId: true} — built-in exercises you've removed; restorable
   custom: Store.get(K.custom,{})  // {dayKey:[{id,name,sets,reps,custom:true}]}
 };
 function save(k){Store.set(K[k],DB[k]);}
@@ -416,6 +420,7 @@ function save(k){Store.set(K[k],DB[k]);}
 /* ================= SMALL HELPERS ================= */
 function el(t,c,h){var e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e;}
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function dispName(x){return DB.names[x.id]||x.name;}
 function pad(n){return String(n).padStart(2,"0");}
 function today(){var d=new Date(); return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());}
 function thisMonth(){var d=new Date(); return d.getFullYear()+"-"+pad(d.getMonth()+1);}
@@ -984,7 +989,7 @@ function renderTrain(){
   head.appendChild(el("span","focus",day.focus));
   root.appendChild(head);
 
-  day.ex.forEach(function(x){ root.appendChild(exCard(x)); });
+  day.ex.filter(function(x){return !DB.hidden[x.id];}).forEach(function(x){ root.appendChild(exCard(x)); });
 
   (DB.custom[activeDay]||[]).forEach(function(x){
     root.appendChild(exCard(x,{
@@ -998,6 +1003,9 @@ function renderTrain(){
   addBtn.onclick=function(){ openExerciseForm(root,activeDay,null); addBtn.style.display="none"; };
   root.appendChild(addBtn);
 
+  var hc=hiddenRestoreCard(day.name,day.ex);
+  if(hc)root.appendChild(hc);
+
   wireTimer();
 }
 function fld(label,cls,content){
@@ -1009,15 +1017,17 @@ function fld(label,cls,content){
   return f;
 }
 /* a single exercise card — used on Train and on Core. x.custom marks a user-added move
-   (no cues/bad/prog/why); x.variants renders an equipment-variation picker that's remembered per exercise. */
+   (no cues/bad/prog/why); x.variants renders an equipment-variation picker that's remembered per exercise.
+   Built-in exercises get a rename control (stored as an override in DB.names); custom ones get full edit + delete. */
 function exCard(x,opts){
   opts=opts||{};
   var c=el("div","ex"+(x.core?" core":"")+(x.custom?" custom":""));
   var top=el("div","ex-top");
   var nm=el("div","ex-nm");
-  nm.appendChild(el("span","n dsp",esc(x.name)));
+  nm.appendChild(el("span","n dsp",esc(dispName(x))));
   nm.appendChild(el("span","m",(x.core?"CORE · ":"")+esc(x.musc||(x.custom?"Added by you":""))));
   top.appendChild(nm);
+  var renameWrap;
   if(x.custom){
     var edit=el("button","ex-del","✎");
     edit.onclick=function(ev){ev.stopPropagation(); opts.onEdit&&opts.onEdit();};
@@ -1025,10 +1035,41 @@ function exCard(x,opts){
     var del=el("button","ex-del","×");
     del.onclick=function(ev){ev.stopPropagation(); opts.onRemove&&opts.onRemove();};
     top.appendChild(del);
+  }else{
+    var ren=el("button","ex-del","✎");
+    top.appendChild(ren);
+    renameWrap=el("div","rename"); renameWrap.style.display="none";
+    var rInput=el("input","addex-in"); rInput.type="text"; rInput.value=dispName(x);
+    var rSave=el("button","btn sm","Save");
+    var rCancel=el("button","btn ghost sm","Cancel");
+    rSave.onclick=function(ev){
+      ev.stopPropagation();
+      var v=rInput.value.trim(); if(!v)return;
+      if(v===x.name)delete DB.names[x.id]; else DB.names[x.id]=v;
+      save("names"); toast("Renamed."); rerender();
+    };
+    rCancel.onclick=function(ev){ev.stopPropagation(); renameWrap.style.display="none"; rInput.value=dispName(x);};
+    renameWrap.appendChild(rInput); renameWrap.appendChild(rSave); renameWrap.appendChild(rCancel);
+    ren.onclick=function(ev){
+      ev.stopPropagation();
+      var show=renameWrap.style.display==="none";
+      renameWrap.style.display=show?"flex":"none";
+      if(show){rInput.focus(); rInput.select();}
+    };
+    var rem=el("button","ex-del","×");
+    rem.onclick=function(ev){
+      ev.stopPropagation();
+      confirmBox("Remove exercise","Take \""+dispName(x)+"\" off this list? Your logged history stays, and you can restore it from the bottom of the page.","Remove").then(function(ok){
+        if(!ok)return;
+        DB.hidden[x.id]=true; save("hidden"); toast("Removed."); rerender();
+      });
+    };
+    top.appendChild(rem);
   }
   top.appendChild(el("span","ex-tog","+"));
   top.onclick=function(){c.classList.toggle("open"); top.querySelector(".ex-tog").textContent=c.classList.contains("open")?"–":"+";};
   c.appendChild(top);
+  if(renameWrap)c.appendChild(renameWrap);
 
   var p=el("div","pres");
   [["Sets",x.sets,"hot"],["Reps",x.reps,""],["RIR",x.rir,""],["Rest",x.rest,""],["Tempo",x.tempo,""]].forEach(function(f){
@@ -1061,6 +1102,24 @@ function exCard(x,opts){
   c.appendChild(logInputs(x.id));
   c.appendChild(histRows(x.id,3));
   return c;
+}
+/* card listing any removed built-in exercises from exList, each with a Restore button. exList is the
+   FULL unfiltered list for that page — pass it straight from the source array, not what got rendered. */
+function hiddenRestoreCard(title,exList){
+  var hidden=exList.filter(function(x){return DB.hidden[x.id];});
+  if(!hidden.length)return null;
+  var hc=el("div","card"); hc.style.marginTop="14px";
+  hc.appendChild(el("h3","blk dsp","Removed from "+title));
+  hidden.forEach(function(x){
+    var row=el("div","todo");
+    var tx=el("div","tx"); tx.appendChild(el("b",null,esc(dispName(x))));
+    row.appendChild(tx);
+    var rb=el("button","btn ghost sm","Restore");
+    rb.onclick=function(){delete DB.hidden[x.id]; save("hidden"); toast("Restored."); rerender();};
+    row.appendChild(rb);
+    hc.appendChild(row);
+  });
+  return hc;
 }
 function removeCustom(dayKey,id){
   confirmBox("Remove exercise","Take this off "+dayKey+"? Anything already logged for it stays in your history.","Remove").then(function(ok){
@@ -1313,25 +1372,26 @@ function renderCore(){
 
   var already=[];
   PROGRAM.forEach(function(d){ d.ex.forEach(function(x){ if(x.core) already.push(x); }); });
-  if(already.length){
+  var alreadyVisible=already.filter(function(x){return !DB.hidden[x.id];});
+  if(alreadyVisible.length){
     var h1=el("h3","blk dsp","Already on your training days");
     h1.style.margin="4px 0 10px";
     root.appendChild(h1);
     root.appendChild(el("p","lede","Same exercises, same log history as Legs and Lower — logging here or there writes to the same place."));
-    already.forEach(function(x){ root.appendChild(exCard(x)); });
+    alreadyVisible.forEach(function(x){ root.appendChild(exCard(x)); });
   }
 
   var h2=el("h3","blk dsp","Aesthetics — visible ab & oblique work");
   h2.style.margin="26px 0 10px";
   root.appendChild(h2);
   root.appendChild(el("p","lede","Loaded, visible-muscle training. This is what shows through the skin."));
-  CORE.aesthetic.forEach(function(x){ root.appendChild(exCard(x)); });
+  CORE.aesthetic.filter(function(x){return !DB.hidden[x.id];}).forEach(function(x){ root.appendChild(exCard(x)); });
 
   var h3e=el("h3","blk dsp","Deep core — brace & anti-movement");
   h3e.style.margin="26px 0 10px";
   root.appendChild(h3e);
   root.appendChild(el("p","lede","Doesn't show in the mirror. This is what keeps the spine safe and lets force transfer through the trunk instead of leaking out of it."));
-  CORE.deep.forEach(function(x){ root.appendChild(exCard(x)); });
+  CORE.deep.filter(function(x){return !DB.hidden[x.id];}).forEach(function(x){ root.appendChild(exCard(x)); });
 
   var lh=el("div"); lh.style.margin="26px 0 12px";
   lh.appendChild(el("p","eyebrow","Bodyweight progression"));
@@ -1340,6 +1400,9 @@ function renderCore(){
   root.appendChild(lh);
   var coreLadder=BODYWEIGHT.patterns.filter(function(p){return p.key==="bw_core";})[0];
   if(coreLadder)root.appendChild(ladderCard(coreLadder,renderCore));
+
+  var hc=hiddenRestoreCard("Core",already.concat(CORE.aesthetic).concat(CORE.deep));
+  if(hc)root.appendChild(hc);
 }
 
 /* ================= RUN ================= */
@@ -1559,7 +1622,7 @@ function renderProgress(){
   ALLEX.forEach(function(o){
     var a=monthBest(o.x.id,pm), b=monthBest(o.x.id,m);
     if(a==null&&b==null)return;
-    lifts.push({name:o.x.name,day:o.d.name,a:a,b:b,delta:(a!=null&&b!=null)?round1(b-a):null});
+    lifts.push({name:dispName(o.x),day:o.d.name,a:a,b:b,delta:(a!=null&&b!=null)?round1(b-a):null});
   });
   var lc=el("div","card");
   lc.appendChild(el("h3","blk dsp","Top weight by lift"));
@@ -1801,11 +1864,11 @@ function renderToday(){
 
  /* quick log rows — tap an exercise to open it and log a set right here */
  if(day){
-  var todayEx=day.ex.concat(DB.custom[day.key]||[]);
+  var todayEx=day.ex.filter(function(x){return !DB.hidden[x.id];}).concat(DB.custom[day.key]||[]);
   todayEx.forEach(function(x){
    var q=el("div","qr"+(x.core?" core":""));
    var t=el("div","qr-t");
-   t.appendChild(el("span","nm",esc(x.name)));
+   t.appendChild(el("span","nm",esc(dispName(x))));
    var lt=lastTop(x.id);
    t.appendChild(el("span","tgt",(x.sets||"—")+" × "+(x.reps||"—")));
    t.appendChild(el("span","last"+(lt?"":" none"),lt?lt.txt:"—"));

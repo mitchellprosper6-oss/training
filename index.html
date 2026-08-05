@@ -366,9 +366,8 @@ h3.blk{margin:0 0 10px; font-size:19px; line-height:1.1}
   <section class="tab on" id="t-today"></section>
   <section class="tab" id="t-train"></section>
   <section class="tab" id="t-core"></section>
-  <section class="tab" id="t-combat"></section>
   <section class="tab" id="t-mobility"></section>
-  <section class="tab" id="t-body"></section>
+  <section class="tab" id="t-cali"></section>
   <section class="tab" id="t-run"></section>
   <section class="tab" id="t-progress"></section>
   <section class="tab" id="t-method"></section>
@@ -456,11 +455,11 @@ function confirmBox(title,body,okLabel){
    Quads and hamstrings are matched at 14 hard sets each per week. */
 var PROGRAM=[
 {key:"pull",name:"Pull",sub:"Back · rear delts · traps · biceps",
- focus:"Back width and thickness, rear delts, traps, biceps and forearms.",ex:[
+ focus:"Back width and thickness, rear delts, traps and biceps.",forearmNote:true,ex:[
  {id:"pul_pullup",name:"Pull-Up",musc:"Lats — warm-up",sets:"2",reps:"8–12",rir:"3–4",rest:"60–90s",tempo:"2-1-1",
   cues:["Full hang to start, ribcage up, drive the elbows down toward your hips.","Stop a few reps short of failure — this is priming the pattern, not the main event."],
   bad:["Grinding to failure here and blunting the pulldown that follows.","Kipping or swinging to get more reps."],
-  prog:"Keep RIR at 3–4. Add reps or a light band-assist as needed — this slot isn't meant to progress hard.",
+  prog:"Keep RIR at 3–4. Add reps as needed, or use an assisted pull-up machine if bodyweight reps run out — this slot isn't meant to progress hard.",
   why:"Warms up the same vertical-pull pattern the pulldown loads harder right after, grooving grip, scapular retraction and lat engagement before the working sets. Kept short and sub-maximal on purpose."},
  {id:"pul_pulldown",name:"Wide-Grip Lat Pulldown",musc:"Lats — width",sets:"4",reps:"8–12",rir:"1–2",rest:"2–2.5 min",tempo:"2-1-2",
   cues:["Drive the elbows down toward your hips — sweep the bar to the upper chest rather than pulling with the hands.","Ribcage up, lean back about 15° and hold it. Full stretch overhead without shrugging into your ears."],
@@ -472,11 +471,16 @@ var PROGRAM=[
   bad:["Jerking with the lower back or legs.","Flaring the elbows so it becomes a rear-delt row.","Cutting the range short at the bottom."],
   prog:"Double progression 8→12, then load.",
   why:"Chest support removes the lower back and the cheating, so rhomboids, mid-traps and lats do the work. Same back stimulus as a barbell row at a fraction of the spinal cost."},
- {id:"pul_cablerow",name:"Seated Cable Row (neutral)",musc:"Back thickness",sets:"3",reps:"10–12",rir:"1–2",rest:"90s–2 min",tempo:"2-1-2",
+ {id:"pul_cablerow_v",name:"Seated Cable Row — V-Handle",musc:"Back thickness — neutral grip",sets:"2",reps:"10–12",rir:"1–2",rest:"90s–2 min",tempo:"2-1-2",
   cues:["Tall torso, minimal swing. Pull to the navel with the elbows tight to the body.","Let the shoulder blades protract fully at the front for a real stretch each rep."],
   bad:["Rocking the torso to move the weight.","Shrugging the traps at the top.","Skipping the stretch at the front."],
   prog:"Double progression 10→12.",
-  why:"A third back angle that loads the stretched position under constant cable tension — completes thickness alongside the pulldown and chest-supported row."},
+  why:"A third back angle that loads the stretched position under constant cable tension — completes thickness alongside the pulldown and chest-supported row. The neutral grip keeps the elbows close and the shoulder happy."},
+ {id:"pul_cablerow_wide",name:"Seated Cable Row — Wide Grip",musc:"Back thickness — wide grip, upper back",sets:"2",reps:"10–12",rir:"1–2",rest:"90s–2 min",tempo:"2-1-2",
+  cues:["Wide bar, hands just outside shoulder width. Pull to the upper abdomen with the elbows flaring out toward 90°.","Lead with the elbows, not the hands — squeeze the shoulder blades together at the back."],
+  bad:["Pulling to the navel like the V-handle version — that turns it back into the same angle.","Rocking the torso or shrugging to move the weight."],
+  prog:"Double progression 10→12.",
+  why:"The wider, higher-elbow angle shifts emphasis onto the upper back and rear delts, off a different line to the V-handle set above — same machine, a second angle for free."},
  {id:"pul_reardelt",name:"Reverse Pec-Deck / Cable Fly",musc:"Rear delts",sets:"3",reps:"12–20",rir:"0–1",rest:"60–90s",tempo:"2-1-1",
   cues:["Lead with the pinkies and elbows — think about spreading the arms wide.","Keep the traps down and relaxed; a little external rotation cleans up the line of pull."],
   bad:["Turning it into a row as the elbows bend and drive back.","Going heavy enough that the traps take over."],
@@ -487,26 +491,16 @@ var PROGRAM=[
   bad:["Rolling the shoulders — no benefit, extra joint stress.","Bouncing with no pause; pulling with the arms."],
   prog:"Double progression 10→15.",
   why:"Direct trap volume for the yoke, and a thick neck and traps are protective in a contact sport. Dumbbells allow full range and stay shoulder-friendly."},
- {id:"pul_inclinecurl",name:"Incline Dumbbell Curl",musc:"Biceps — long head",sets:"3",reps:"8–12",rir:"1–2",rest:"90s",tempo:"3-0-1",
-  cues:["Elbows stay behind the torso for the whole set — the stretched position is the entire point.","Supinate hard, full stretch at the bottom, no swinging."],
-  bad:["Letting the elbows drift forward, which kills the stretch.","Half reps and heaving."],
+ {id:"pul_preacher",name:"Preacher Curl (EZ bar or machine)",musc:"Biceps — short head, peak contraction",sets:"3",reps:"8–12",rir:"1–2",rest:"90s",tempo:"2-1-2",
+  cues:["Upper arms flat on the pad — don't let the elbows slide up. Full contraction at the top.","Control the negative; don't crash into the bottom stretch."],
+  bad:["Coming off the pad to cheat.","Bouncing out of the bottom, half reps at the top."],
   prog:"Double progression 8→12.",
-  why:"The behind-the-body angle puts the long head in deep stretch, which is where most of the growth signal lives. Complements the shortened-range preacher work on Upper."},
+  why:"Fixing the elbows forward biases the short head and the peak-contraction range — the opposite end of the rep to the deep-stretch incline curl on Upper day, so the biceps get worked at both ends of the range across the week."},
  {id:"pul_hammer",name:"Hammer Curl",musc:"Brachialis / brachioradialis",sets:"3",reps:"10–15",rir:"1–2",rest:"75–90s",tempo:"2-0-1",
   cues:["Neutral grip throughout, minimal swing, controlled lowering.","Drift slightly across the body to bias the brachialis."],
   bad:["Swinging or going too heavy.","Rushing the eccentric."],
   prog:"Double progression 10→15.",
-  why:"Builds the brachialis, which pushes the biceps up for a taller peak, plus forearm thickness and elbow resilience — useful under grappling loads."},
- {id:"pul_reversecurl",name:"Reverse Curl (EZ bar or rope)",musc:"Forearm extensors",sets:"3",reps:"12–15",rir:"0–1",rest:"60–75s",tempo:"2-0-2",
-  cues:["Pronated grip, wrists neutral to slightly extended. Strict, no swing.","Squeeze at the top and control the way down."],
-  bad:["Flexing the wrist to cheat the weight up.","Going too heavy — form collapses fast here."],
-  prog:"Double progression 12→15.",
-  why:"Trains the extensor side of the forearm so grip and wrists stay balanced and injury-resistant. Paired with wrist curls on Upper for both sides."},
- {id:"pul_wristcurl",name:"Wrist Curl",musc:"Forearm flexors",sets:"3",reps:"15–20",rir:"0–1",rest:"45–60s",tempo:"2-1-2",
-  cues:["Forearms supported, wrists off the edge. Let the bar roll to the fingertips for a full stretch, then curl and squeeze.","Controlled throughout."],
-  bad:["Tiny range.","So heavy it only moves an inch."],
-  prog:"Double progression 15→20.",
-  why:"Balances the reverse-curl extensor work above for complete, injury-resistant forearms and grip. Last, so grip fatigue doesn't limit anything earlier in the session."}
+  why:"Builds the brachialis, which pushes the biceps up for a taller peak, plus forearm thickness and elbow resilience — useful under grappling loads."}
 ]},
 
 {key:"push",name:"Push",sub:"Chest · shoulders · triceps",
@@ -554,180 +548,179 @@ var PROGRAM=[
 ]},
 
 {key:"legs",name:"Legs",sub:"Hamstrings · quads · calves",
- focus:"Hamstrings first, then quads, calves, shins and adductors. 8 hamstring and 7 quad sets today.",ex:[
- {id:"leg_seatedcurl",name:"Seated Leg Curl",musc:"Hamstrings — knee flexion",sets:"4",reps:"8–12",rir:"1–2",rest:"90s–2 min",tempo:"2-1-2",
+ focus:"Hamstrings first, then quads, calves, shins and adductors. Two hard sets per exercise, more movements instead of more volume on any one of them — 4 hamstring and 4 quad sets today.",forearmNote:true,ex:[
+ {id:"leg_seatedcurl",name:"Seated Leg Curl",musc:"Hamstrings — knee flexion",sets:"2",reps:"8–12",rir:"1–2",rest:"90s–2 min",tempo:"2-1-2",
   cues:["Hips pinned by the pad, torso upright. Curl fully, hold the squeeze, slow the eccentric.","Point the toes to reduce calf cramping, or dorsiflex to pull the gastroc in."],
   bad:["Hips lifting off the seat.","Momentum, half reps, slamming the weight back."],
   prog:"Double progression 8→12.",
   why:"Opens the day so hamstrings get priority before any fatigue. The seated position biases a strong stretch and trains both heads."},
- {id:"leg_smithsquat",name:"Smith Machine Squat (quad-biased)",musc:"Quads — compound",sets:"4",reps:"6–10",rir:"1–3",rest:"2.5–3 min",tempo:"3-0-1",
-  cues:["Feet slightly ahead of the hips, shoulder-width. Sit straight down, knees tracking over and past the toes.","Parallel or below. Brace hard the whole rep."],
-  bad:["Letting it become a hip hinge, which loses the quad bias.","Shallow depth, knees caving, heels rising."],
+ {id:"leg_legpress",name:"Leg Press",musc:"Quads — compound",sets:"2",reps:"6–10",rir:"1–3",rest:"2.5–3 min",tempo:"3-0-1",
+  cues:["Feet shoulder-width, mid-low on the plate for a quad bias. Lower until your knees reach a deep bend without your hips rounding off the seat.","Press through the whole foot. Brace hard the whole rep."],
+  bad:["Letting the hips round off the pad at the bottom.","Locking the knees out hard at the top.","Feet too high or too wide, which shifts it toward the hips."],
   prog:"Double progression 6→10, then add plates and reset.",
-  why:"Your heavy quad builder. The fixed bar path lets you push close to failure safely with a quad-biased stance and far less spinal and balance demand than a back squat."},
- {id:"leg_rdl",name:"Romanian Deadlift",musc:"Hamstrings — hip extension",sets:"4",reps:"8–10",rir:"2–3",rest:"2.5–3 min",tempo:"3-1-1",
-  cues:["Soft knees fixed, hinge at the hips, bar dragging close to the legs.","Push the hips back until you feel a deep hamstring stretch around mid-shin. Neutral spine, ribs down, drive the hips forward to stand."],
-  bad:["Rounding the lower back.","Turning it into a squat by bending the knees more.","Chasing depth past your flexibility, or bouncing off the floor."],
+  why:"Your heavy quad builder. The seat and back support let you push close to failure safely, with far less balance and spinal demand than a squat pattern."},
+ {id:"leg_sldl",name:"SLDL (Cable, Lat Pulldown Machine)",musc:"Hamstrings — hip extension",sets:"2",reps:"8–10",rir:"2–3",rest:"2.5–3 min",tempo:"3-1-1",
+  cues:["Straight bar or rope on the lat pulldown machine's low pulley, standing tall in front of it. Soft knees fixed, hinge at the hips, bar dragging close to the legs.","Push the hips back until you feel a deep hamstring stretch around mid-shin. Neutral spine, ribs down, drive the hips forward to stand."],
+  bad:["Rounding the lower back.","Turning it into a squat by bending the knees more.","Chasing depth past your flexibility."],
   prog:"Double progression 8→10. Keep RIR at 2 or above and add load conservatively.",
-  why:"The hip-extension half of hamstring training and a huge stretch-mediated growth driver curls can't reach. Now at four sets so hip extension matches knee flexion across the week."},
- {id:"leg_legext",name:"Leg Extension",musc:"Quads — isolation",sets:"3",reps:"12–15",rir:"0–1",rest:"75–90s",tempo:"2-1-2",
+  why:"The hip-extension half of hamstring training and a huge stretch-mediated growth driver curls can't reach. The cable keeps constant tension through the stretch and is easier on the low back than a barbell version."},
+ {id:"leg_legext",name:"Leg Extension",musc:"Quads — isolation",sets:"2",reps:"12–15",rir:"0–1",rest:"75–90s",tempo:"2-1-2",
   cues:["Back against the pad, full lockout squeeze, control the negative.","On the last set add 4–6 lengthened partials once full reps run out."],
   bad:["Momentum, half reps, slamming down.","Hips lifting off the seat."],
   prog:"Double progression 12→15, then load, then finish with partials.",
-  why:"Isolates all four quad heads in the shortened position with no systemic cost — the ideal place to bank quad volume after the heavy squat."},
- {id:"leg_adduction",name:"Cable Hip Adduction",musc:"Adductors",sets:"3",reps:"12–20",rir:"0–1",rest:"60–90s",tempo:"2-1-2",
+  why:"Isolates all four quad heads in the shortened position with no systemic cost — the ideal place to bank quad volume after the leg press."},
+ {id:"leg_adduction",name:"Cable Hip Adduction",musc:"Adductors",sets:"2",reps:"12–20",rir:"0–1",rest:"60–90s",tempo:"2-1-2",
   cues:["Cable on the inner ankle, stand tall and braced. Pull the leg across the midline.","Slow return under stretch. A machine adduction is identical."],
   bad:["Swinging the whole body.","Short range, or rushing the eccentric — the stretch is the insurance."],
   prog:"Double progression 12→20.",
   why:"Strong, mobile adductors mean groin durability, better knee tracking and real control of kicks and level changes."},
- {id:"leg_standingcalf",name:"Standing Calf Raise",musc:"Calves — gastrocnemius",sets:"4",reps:"8–15",rir:"0–2",rest:"60–90s",tempo:"2-2-1",
+ {id:"leg_standingcalf",name:"Standing Calf Raise",musc:"Calves — gastrocnemius",sets:"2",reps:"8–15",rir:"0–2",rest:"60–90s",tempo:"2-2-1",
   variants:["Standing calf machine","Toe press on the leg press","Single-leg raise off a bench or step"],
   cues:["Knees straight to bias the gastroc. Full stretch at the bottom, all the way onto the big toe.","Pause top and bottom — no Achilles bouncing."],
   bad:["Bouncing.","Partial range, or bent knees which shift it to the soleus."],
   prog:"Double progression 8→15.",
   why:"Straight knees target the visible calf, and it pairs with seated work on Lower for the soleus. Ankle stiffness is free speed in a stance. No calf machine free? The leg press and a bench both load the same range — pick a variation above and it's remembered here."},
- {id:"leg_tib",name:"Tibialis Raise",musc:"Tibialis — shins",sets:"3",reps:"15–25",rir:"0–1",rest:"45–60s",tempo:"2-1-2",
+ {id:"leg_tib",name:"Tibialis Raise",musc:"Tibialis — shins",sets:"2",reps:"15–25",rir:"0–1",rest:"45–60s",tempo:"2-1-2",
   cues:["Heels on a plate or back against a wall. Pull the toes up toward the shins as far as they go, then squeeze.","Control the way down."],
   bad:["Tiny range.","Bodyweight momentum."],
   prog:"Double progression 15→25, then add a plate or a weighted boot.",
-  why:"Balanced lower legs, stronger ankles and better dorsiflexion. This is the shin-splint and ankle-sprain insurance muscle."},
- {id:"leg_wristcurl",name:"Wrist Curl",musc:"Forearm flexors",sets:"3",reps:"15–20",rir:"0–1",rest:"45–60s",tempo:"2-1-2",
-  cues:["Forearms supported, wrists off the edge. Let the bar roll to the fingertips for a full stretch, then curl and squeeze.","Controlled throughout."],
-  bad:["Tiny range.","So heavy it only moves an inch."],
-  prog:"Double progression 15→20.",
-  why:"A little extra forearm and grip volume on a day that otherwise doesn't touch it — cheap insurance for grip endurance in scrambles and holds."}
+  why:"Balanced lower legs, stronger ankles and better dorsiflexion. This is the shin-splint and ankle-sprain insurance muscle."}
 ]},
 
 {key:"upper",name:"Upper",sub:"Arms · shoulders · chest · back",
- focus:"Fixed order — biceps, triceps, shoulders, chest, then back, rear delts and forearms.",ex:[
- {id:"upr_preacher",name:"Preacher Curl (EZ bar or machine)",musc:"Biceps — short head",sets:"3",reps:"8–12",rir:"1–2",rest:"90s",tempo:"2-1-2",
-  cues:["Upper arms flat on the pad — don't let the elbows slide up. Full contraction at the top.","Control the negative; don't crash into the bottom stretch."],
-  bad:["Coming off the pad to cheat.","Bouncing out of the bottom, half reps at the top."],
+ focus:"Fixed order — biceps, triceps, shoulders, chest, then back and forearms. Two hard sets per exercise, everything included.",ex:[
+ {id:"upr_ezcurl",name:"EZ Bar Curl",musc:"Biceps",sets:"2",reps:"8–12",rir:"1–2",rest:"90s",tempo:"2-1-2",
+  cues:["Standing or seated, elbows pinned to your sides for the whole set. Curl to a full contraction, squeeze a beat.","Control the negative all the way down to a full stretch."],
+  bad:["Swinging the torso or the elbows drifting forward to cheat the weight up.","Only doing the top half of the rep."],
   prog:"Double progression 8→12.",
-  why:"Fixing the elbow forward biases the short head and the peak-contraction range that the incline curl's stretch doesn't cover. Placed first while your arms are fresh."},
- {id:"upr_jm",name:"Smith Machine JM Press",musc:"Triceps — long head under load",sets:"3",reps:"8–12",rir:"1–2",rest:"90s–2 min",tempo:"3-0-1",
+  why:"A straightforward, moderate-stretch-to-full-contraction curl, placed first while your arms are freshest — the EZ bend keeps the wrists comfortable under load."},
+ {id:"upr_inclinecurl",name:"Incline Dumbbell Curl",musc:"Biceps — long head",sets:"2",reps:"8–12",rir:"1–2",rest:"90s",tempo:"3-0-1",
+  cues:["Elbows stay behind the torso for the whole set — the stretched position is the entire point.","Supinate hard, full stretch at the bottom, no swinging."],
+  bad:["Letting the elbows drift forward, which kills the stretch.","Half reps and heaving."],
+  prog:"Double progression 8→12.",
+  why:"The behind-the-body angle puts the long head in deep stretch, which is where most of the growth signal lives — complementing the peak-contraction EZ bar curl above."},
+ {id:"upr_jm",name:"Smith Machine JM Press",musc:"Triceps — long head under load",sets:"2",reps:"8–12",rir:"1–2",rest:"90s–2 min",tempo:"3-0-1",
   cues:["Lie as for a close-grip bench, hands about shoulder-width. Lower the bar toward the upper chest and throat line while letting the elbows travel forward — halfway between a close-grip press and a skullcrusher.","Stop when the forearms are near the biceps, then drive back up. Keep the elbows in line with the bar path, not flared."],
   bad:["Turning it into a pure close-grip bench by keeping the upper arms vertical.","Letting the bar drift over the face like a skullcrusher, which loads the elbow rather than the muscle.","Going heavy before the groove is learned — this one rewards practice at moderate load."],
   prog:"Double progression 8→12, then add the smallest plate available and reset to 8.",
   why:"Replaces the skullcrusher. You get the same stretched long-head position but the load is shared with a pressing pattern, so the elbows take far less strain — and on a Smith machine the bar path is fixed, so you can push near failure alone and learn the groove safely."},
- {id:"upr_lateral",name:"Dumbbell Lateral Raise",musc:"Side delts",sets:"4",reps:"12–20",rir:"0–1",rest:"60–90s",tempo:"2-0-2",
+ {id:"upr_satricep",name:"Single-Arm Triceps Extension",musc:"Triceps — unilateral",sets:"2",reps:"10–15 / arm",rir:"0–1",rest:"75–90s",tempo:"2-0-2",
+  cues:["One handle on a low or high cable (or a single dumbbell overhead), elbow tucked and fixed. Extend to full lockout, squeeze, then control the stretch back.","Keep the elbow pinned in place — it shouldn't travel forward or flare out."],
+  bad:["Elbow drifting to help finish the rep.","Leaning the torso into it instead of isolating the arm."],
+  prog:"Double progression 10→15 per arm, then load.",
+  why:"One arm at a time closes any left-right gap and keeps the elbow honest in a way a two-handed pushdown lets you cheat — a second triceps angle to close out the day's arm work."},
+ {id:"upr_lateral",name:"Dumbbell Lateral Raise",musc:"Side delts",sets:"2",reps:"12–20",rir:"0–1",rest:"60–90s",tempo:"2-0-2",
   cues:["Lead with the elbows, control down, no swing. Slight forward lean, constant tension.","Don't rest at the bottom of each rep."],
   bad:["Momentum and traps.","Going above shoulder height."],
   prog:"Double progression 12→20, micro-load.",
   why:"Second weekly side-delt session. Highest return per set for shoulder width and it thrives on frequency."},
- {id:"upr_frontraise",name:"Dumbbell Front Raise",musc:"Delts — front",sets:"3",reps:"12–15",rir:"0–1",rest:"60–75s",tempo:"2-0-2",
+ {id:"upr_frontraise",name:"Dumbbell Front Raise",musc:"Delts — front",sets:"2",reps:"12–15",rir:"0–1",rest:"60–75s",tempo:"2-0-2",
   cues:["Raise to eye level with a soft bend in the elbow, thumbs slightly up.","Control the descent — don't let the dumbbells fall past the front of your thighs."],
   bad:["Swinging from the hips or shrugging to start the rep.","Raising past shoulder height, which shifts load onto the traps."],
   prog:"Double progression 12→15, micro-load.",
   why:"Direct front-delt isolation to round out the shoulder press. The front delt already works hard on every push day, so this stays light and short."},
- {id:"upr_incmachine",name:"Incline Machine / Smith Press",musc:"Chest — upper",sets:"3",reps:"8–12",rir:"1–2",rest:"2 min",tempo:"2-1-2",
+ {id:"upr_incmachine",name:"Incline Machine / Smith Press",musc:"Chest — upper",sets:"2",reps:"8–12",rir:"1–2",rest:"2 min",tempo:"2-1-2",
   cues:["Bench around 30°, shoulder blades retracted, press over the upper chest.","Full controlled range."],
   bad:["Bench too steep.","Half reps, shoulders rolling forward."],
   prog:"Double progression 8→12.",
   why:"A second upper-chest session on a stable path so you can push hard this late in the day. Swap to a flat press if mid-chest starts lagging."},
- {id:"upr_midflye",name:"Flat Bench Press",musc:"Chest — mid",sets:"3",reps:"8–12",rir:"1–2",rest:"2–2.5 min",tempo:"2-1-1",
-  cues:["Shoulder blades pinched and pinned to the bench, slight arch, feet driven into the floor.","Bar to the mid-chest, elbows around 45–60°, press up and slightly back."],
-  bad:["Elbows flared to 90°, which stresses the shoulder.","Bouncing the bar off the chest."],
-  prog:"Double progression 8→12, then add plates and reset.",
-  why:"A second mid-chest session on a fixed bar path — swapped in for the cable fly so this slot builds raw pressing strength instead of pure isolation, complementing the two incline-biased presses earlier in the day."},
- {id:"upr_pullup",name:"Single-Arm Lat Pulldown",musc:"Lats — width, unilateral",sets:"3",reps:"8–12 / arm",rir:"1–2",rest:"90s–2 min",tempo:"2-1-1",
+ {id:"upr_midflye",name:"Flat Bench Press or Dumbbell Press",musc:"Chest — mid",sets:"2",reps:"8–12",rir:"1–2",rest:"2–2.5 min",tempo:"2-1-1",
+  variants:["Flat Barbell Bench Press","Flat Dumbbell Press"],
+  cues:["Shoulder blades pinched and pinned, slight arch, feet driven into the floor.","Bar or dumbbells to the mid-chest, elbows around 45–60°, press up and slightly back."],
+  bad:["Elbows flared to 90°, which stresses the shoulder.","Bouncing the weight off the chest."],
+  prog:"Double progression 8→12, then add load and reset.",
+  why:"A second mid-chest session, barbell or dumbbells depending on what you feel like that day — either way it builds raw pressing strength, complementing the two incline-biased presses earlier in the day."},
+ {id:"upr_pullup",name:"Single-Arm Lat Pulldown",musc:"Lats — width, unilateral",sets:"2",reps:"8–12 / arm",rir:"1–2",rest:"90s–2 min",tempo:"2-1-1",
   cues:["Single handle, torso tall with a slight lean back. Pull the elbow down and back toward your hip, driving through the lat.","Let the arm reach fully overhead on the return for a real stretch before the next rep."],
   bad:["Twisting the torso to help finish the pull.","Using the bicep to yank instead of driving the elbow down."],
   prog:"Double progression 8→12 per arm, then load.",
   why:"One arm at a time closes any left-right lat imbalance and lets you reach a deeper stretch than a two-handed bar allows. Second weekly width session, led into the row while your back is fresh."},
- {id:"upr_csrow",name:"T-Bar Row",musc:"Back — thickness",sets:"4",reps:"8–12",rir:"1–2",rest:"2 min",tempo:"2-1-1",
-  cues:["Chest over the bar, hinge to about 45°, neutral spine.","Row to the sternum, drive the elbows back and squeeze the shoulder blades together, then lower under control."],
-  bad:["Standing too upright, turning it into a shrug.","Yanking with the lower back instead of the lats and mid-back."],
-  prog:"Double progression 8→12, then add plates and reset.",
-  why:"A closer, more supported grip than a barbell row, so you can load the mid-back hard with a bit less lower-back strain. Second weekly back-thickness session, off the pulldown above."},
- {id:"upr_facepull",name:"Face Pull",musc:"Rear delts",sets:"3",reps:"15–20",rir:"0–1",rest:"60–90s",tempo:"2-1-1",
-  cues:["Rope to the face, pull the hands apart and finish with the thumbs pointing back — external rotation at the end, not just a row.","Elbows stay high, roughly level with the shoulders."],
-  bad:["Pulling low into the chest like a row, which loses the rear-delt and rotator-cuff bias.","Too heavy, so the finish turns into a shrug."],
-  prog:"Double progression 15→20.",
-  why:"Second weekly rear-delt and external-rotation session — swapped in for the reverse pec-deck because the finish also trains the rotator cuff, which matters more for shoulder health under repeated pressing than an isolated rear-delt fly does."},
- {id:"upr_wristcurl",name:"Wrist Curl",musc:"Forearm flexors",sets:"3",reps:"15–20",rir:"0–1",rest:"45–60s",tempo:"2-1-2",
+ {id:"upr_csrow",name:"Single-Arm Cable Row",musc:"Back — thickness, unilateral",sets:"2",reps:"8–12 / arm",rir:"1–2",rest:"90s–2 min",tempo:"2-1-2",
+  cues:["Single handle on the low pulley, chest tall. Row the elbow back past your ribs and squeeze the shoulder blade in.","Let the arm reach forward into a real stretch each rep, without letting the torso rotate to help."],
+  bad:["Twisting the torso to add momentum.","Yanking with the lower back instead of the lat and mid-back."],
+  prog:"Double progression 8→12 per arm, then load.",
+  why:"One arm at a time closes any left-right imbalance in the back and stops the stronger side compensating — a closer, more controlled thickness angle than a two-handed bar."},
+ {id:"upr_facepull",name:"Chest-Supported Row",musc:"Back — thickness, second session",sets:"2",reps:"8–12",rir:"1–2",rest:"2 min",tempo:"2-1-2",
+  cues:["Chest glued to the pad. Row to the lower ribs and pause a second in the squeeze.","Retract and depress the shoulder blades; elbows around 45°, not flared to 90°."],
+  bad:["Jerking with the lower back or legs.","Flaring the elbows so it becomes a rear-delt row.","Cutting the range short at the bottom."],
+  prog:"Double progression 8→12, then load.",
+  why:"A second thickness row to close the day, off a different angle to the single-arm cable row above. Rear-delt and rotator-cuff work now live on Pull day's reverse pec-deck and on the Active Rest day instead."},
+ {id:"upr_wristcurl",name:"Wrist Curl",musc:"Forearm flexors",sets:"2",reps:"15–20",rir:"0–1",rest:"45–60s",tempo:"2-1-2",
   cues:["Forearms supported, wrists off the edge. Let the bar roll to the fingertips for a full stretch, then curl and squeeze.","Controlled throughout."],
   bad:["Tiny range.","So heavy it only moves an inch."],
   prog:"Double progression 15→20.",
-  why:"Balances the reverse-curl extensor work from Pull day for complete, injury-resistant forearms and grip. Last, so grip fatigue doesn't limit anything earlier in the session."}
+  why:"The one loaded forearm-flexor set left in the split — Pull, Legs and Lower use unweighted forearm work instead. Last, so grip fatigue doesn't limit anything earlier in the session."}
 ]},
 
 {key:"lower",name:"Lower",sub:"Quads · hamstrings · calves",
- focus:"Complements Leg day — 7 quad and 6 hamstring sets, plus soleus.",ex:[
- {id:"lwr_legpress",name:"Leg Extension",musc:"Quads — isolation",sets:"4",reps:"12–15",rir:"0–1",rest:"75–90s",tempo:"2-1-2",
+ focus:"Complements Leg day — two hard sets per exercise, 4 quad and 4 hamstring sets, plus soleus.",forearmNote:true,ex:[
+ {id:"lwr_legpress",name:"Leg Extension",musc:"Quads — isolation",sets:"2",reps:"12–15",rir:"0–1",rest:"75–90s",tempo:"2-1-2",
   cues:["Back against the pad, full lockout squeeze, control the negative.","On the last set add 4–6 lengthened partials once full reps run out."],
   bad:["Momentum, half reps, slamming down.","Hips lifting off the seat."],
   prog:"Double progression 12→15, then load, then finish with partials.",
-  why:"Second weekly quad-isolation session, kept at four sets so weekly quad volume stays matched with hamstrings at 14. Same shortened-range squeeze as Legs day, spaced out through the week so it adds up without overloading any one session."},
- {id:"lwr_lyingcurl",name:"Seated Leg Curl",musc:"Hamstrings — knee flexion",sets:"3",reps:"8–12",rir:"1–2",rest:"90s–2 min",tempo:"2-1-2",
+  why:"Second weekly quad-isolation session, so weekly quad volume stays matched with hamstrings. Same shortened-range squeeze as Legs day, spaced out through the week so it adds up without overloading any one session."},
+ {id:"lwr_lyingcurl",name:"Seated Leg Curl",musc:"Hamstrings — knee flexion",sets:"2",reps:"8–12",rir:"1–2",rest:"90s–2 min",tempo:"2-1-2",
   cues:["Hips pinned by the pad, torso upright. Curl fully, hold the squeeze, slow the eccentric.","Point the toes to reduce calf cramping, or dorsiflex to pull the gastroc in."],
   bad:["Hips lifting off the seat.","Momentum, half reps, slamming the weight back."],
   prog:"Double progression 8→12.",
   why:"Second weekly seated-curl session — same strong-stretch angle as Legs day, spaced out through the week so it adds up without overloading any one session."},
- {id:"lwr_bulgarian",name:"Bulgarian Split Squat",musc:"Quads / adductors — unilateral",sets:"3",reps:"8–12 / leg",rir:"1–2",rest:"2 min",tempo:"2-1-1",
+ {id:"lwr_bulgarian",name:"Bulgarian Split Squat",musc:"Quads / adductors — unilateral",sets:"2",reps:"8–12 / leg",rir:"1–2",rest:"2 min",tempo:"2-1-1",
   cues:["Rear foot on a bench, torso fairly upright for quad bias. Drop straight down with the front knee travelling over the toes.","Drive through the whole front foot and keep the balance controlled."],
   bad:["Pushing off the back leg.","Leaning too far forward, which makes it glute-dominant.","Rushing and losing balance."],
   prog:"Double progression 8→12 per leg, then add dumbbells.",
   why:"Single-leg strength and balance that transfers straight into stance, level changes and kicking, while ironing out left-right imbalances at almost no spinal cost."},
- {id:"lwr_hipext",name:"Standing Good Morning",musc:"Hamstrings — hip extension",sets:"3",reps:"8–12",rir:"1–2",rest:"2 min",tempo:"3-1-1",
-  cues:["Bar on the back like a squat, soft knees fixed. Hinge at the hips, chest staying tall, until you feel a deep hamstring stretch.","Drive the hips forward to stand, squeezing the glutes at the top."],
+ {id:"lwr_hipext",name:"SLDL (Cable, Lat Pulldown Machine)",musc:"Hamstrings — hip extension",sets:"2",reps:"8–12",rir:"1–2",rest:"2 min",tempo:"3-1-1",
+  cues:["Straight bar or rope on the lat pulldown machine's low pulley. Soft knees fixed, hinge at the hips, chest staying tall, until you feel a deep hamstring stretch.","Drive the hips forward to stand, squeezing the glutes at the top."],
   bad:["Rounding the lower back.","Bending the knees more to turn it into a squat.","Going too heavy before the hinge pattern is grooved."],
   prog:"Double progression 8→12, adding load conservatively — this one rewards patience.",
-  why:"A second weekly hip-extension session to go with the RDL on Legs day, trained standing and unsupported so it also builds the postural strength to hold a hinge under load. Hip extension and knee flexion still end the week matched at 7 sets each."},
- {id:"lwr_seatedcalf",name:"Seated Calf Raise",musc:"Calves — soleus",sets:"4",reps:"10–20",rir:"0–2",rest:"60–90s",tempo:"2-2-1",
+  why:"A second weekly hip-extension session to go with the SLDL on Legs day. The cable keeps constant tension and is a lot friendlier on the low back than the barbell good morning it replaces."},
+ {id:"lwr_seatedcalf",name:"Seated Calf Raise",musc:"Calves — soleus",sets:"2",reps:"10–20",rir:"0–2",rest:"60–90s",tempo:"2-2-1",
   variants:["Seated calf machine","Bent-knee toe press on the leg press"],
   cues:["Knees bent to 90° to target the soleus, pad on the lower thigh.","Full stretch at the bottom, all the way onto the toes, pause at both ends."],
   bad:["Bouncing.","Partial range."],
   prog:"Double progression 10→20.",
   why:"The bent knee isolates the soleus, which the standing raise misses. The soleus is the endurance calf — it matters for round-after-round footwork."}
+]},
+
+{key:"activerest",name:"Active Rest",sub:"Cardio · hip mobility · joints & stability · core",
+ focus:"Built around the hips and SI joint, not around load. Light steady cardio, hip-mobility work with a pelvic-tilt focus, then light joint, stability and rotator-cuff work before a core finisher. Nothing here should leave you sore.",
+ blocks:[
+  {name:"Cardio",time:"10–15 min",items:[
+   "Bike, incline walk or rower, easy and steady. Nose-breathing pace — just enough to raise your temperature before the joint work, not a workout in itself."]},
+  {name:"Mobility & stretching — hips first",time:"10–12 min",items:[
+   "Supine posterior pelvic tilt — 3 × 10, low back pressed flat into the floor on the exhale, hold 3 seconds. This is the position everything below builds from.",
+   "Standing pelvic tilts — 10 slow, rocking through anterior and posterior tilt to find neutral.",
+   "90/90 hip switches — 10 slow, freeing internal and external rotation without forcing the end range.",
+   "Couch stretch — 60–90s per side, rear shin up a wall, pelvis tucked under. The rear hip flexor is usually what's actually locking the hips up.",
+   "Kneeling hip flexor stretch with an active posterior tilt — 45s per side, squeezing the glute of the rear leg to tuck the pelvis rather than just leaning forward.",
+   "Cat–cow — 10 slow, moving one vertebra at a time.",
+   "Want more? The full routine lives on the Flexibility tab."]}
+ ],ex:[
+ {id:"ar_slrdl",name:"Single-Leg Deadlift",musc:"Hip hinge — balance, unilateral, SI-friendly",sets:"2",reps:"8–10 / leg",rir:"3–4",rest:"60s",tempo:"2-1-2",
+  cues:["Bodyweight, or one light dumbbell in the opposite hand. Hinge from the hip, standing leg soft, free leg reaching straight back for balance.","Square the hips to the floor the whole way — this is a balance drill first, a hamstring exercise second."],
+  bad:["Rushing it — the point is control, not load.","Letting the hips rotate open to fake the range."],
+  prog:"Add a light dumbbell once bodyweight is fully controlled, then build reps 8→10.",
+  why:"Trains the hip hinge unilaterally and cheaply, which finds and fixes side-to-side imbalance around the SI joint without ever loading the spine."},
+ {id:"ar_sldl",name:"SLDL (light)",musc:"Hamstrings — hip extension, low load",sets:"2",reps:"10–12",rir:"3–4",rest:"60s",tempo:"2-1-2",
+  cues:["Light dumbbells or a light cable, knees soft and fixed. Hinge at the hips until you feel the hamstring stretch, then stand tall.","This is a movement-quality set, not a working set — stop well short of grinding."],
+  bad:["Loading it up — that's what Leg and Lower day are for.","Rounding the lower back to chase more stretch."],
+  prog:"Add reps before you ever add load. This slot stays light on purpose.",
+  why:"A second, low-stakes pass at the hip-hinge pattern to keep it grooved and the hamstrings and glutes doing their share of stabilising the pelvis."},
+ {id:"ar_facepull",name:"Face Pull",musc:"Rear delts / rotator cuff",sets:"2",reps:"15–20",rir:"2–3",rest:"60s",tempo:"2-1-1",
+  cues:["Light on a cable, rope to the face, pull the hands apart and finish with the thumbs pointing back.","Elbows high, roughly level with the shoulders. Easy weight — this is about the finish position, not the load."],
+  bad:["Loading it heavy enough that the finish turns into a shrug.","Pulling low into the chest like a row."],
+  prog:"Add reps only. If it ever feels like work, the weight is too heavy for this slot.",
+  why:"Rear delts and external rotation, kept light and frequent for shoulder health rather than size — cheap insurance on a day built around joints."},
+ {id:"ar_extrot",name:"Rotator Cuff — Side-Lying External Rotation",musc:"Rotator cuff",sets:"2",reps:"12–15 / side",rir:"2–3",rest:"45–60s",tempo:"2-1-2",
+  cues:["Lying on your side, elbow tucked to your ribs and bent 90°. Rotate the forearm up, keeping the elbow pinned to your side.","Light dumbbell or just the hand — range and control matter far more than load here."],
+  bad:["Letting the elbow drift away from the ribs, which turns it into a shoulder raise.","Using enough weight that the shoulder shrugs to help."],
+  prog:"Add reps before load. This one almost never needs to get heavy.",
+  why:"Direct, isolated work for the small muscles that hold the shoulder in the socket — they get worked hard indirectly all week and rarely get anything directly."}
 ]}
 ];
-var RESTS={legs:"Rest — sleep, protein, a walk. This sits between your two hardest sessions.",
-           lower:"Rest or active recovery — the mobility session works well here. Then back to Pull."};
-
-/* ================= COMBAT — power, rotation, athleticism ================= */
-var COMBAT={
-  intro:"Two sessions a week, 30–40 minutes each, on non-lifting days or straight after a light lift. Everything here is trained for speed, not for burn: full rest, low reps, maximum intent. The moment a throw or a jump slows down, the set is over — chasing fatigue in a power session just teaches you to be explosive slowly.",
-  sessions:[
-   {key:"cmb_a",name:"Session A",tag:"Rotation & Throwing Power",
-    note:"The punch and the kick both start at the floor and arrive through the trunk. This session trains that chain end to end.",
-    blocks:[
-     {name:"Prime",time:"6 min",items:[
-      "Pogo hops — 3 × 20. Stiff ankles, minimal ground contact. Wakes up the elastic qualities everything else depends on.",
-      "90/90 hip switches — 10 slow. Free the hips before you ask them to rotate fast.",
-      "Band pull-aparts + shoulder circles — 15 each."]},
-     {name:"Rotational power",time:"14 min",items:[
-      "Med-ball rotational throw into a wall — 4 × 5 per side. Load the back hip, pivot the rear foot, let the arms arrive last. Full effort, walk back between reps.",
-      "Med-ball overhead slam — 3 × 5. Whole-body extension then violent flexion; this is the shot you finish with.",
-      "Landmine rotation — 3 × 8 per side, controlled. The braking half of rotation — being able to stop a rotation is what stops you being taken down by one."]},
-     {name:"Elastic lower body",time:"8 min",items:[
-      "Broad jump — 4 × 3, full rest. Land quietly and stick it. Also your monthly test lift, so log the best one.",
-      "Lateral bound — 3 × 4 per side. Push off the outside leg, stick the landing for a beat before the next.",
-      "Depth drop to stick — 3 × 4 from a low box. Absorbing force well is what lets you produce it."]},
-     {name:"Finisher",time:"6 min",items:[
-      "Shadowbox intervals — 6 × 20s hard / 40s easy. Hands and feet moving together, not arms alone.",
-      "Neck: 3 × 15 gentle isometrics each direction. Unglamorous and non-negotiable in a contact sport."]}
-    ]},
-   {key:"cmb_b",name:"Session B",tag:"Athletic Movement & Change of Direction",
-    note:"Coordination under speed. Short efforts, long rests, and stop when the movement gets sloppy rather than when you get tired.",
-    blocks:[
-     {name:"Prime",time:"6 min",items:[
-      "Skips — A-skip, B-skip, carioca, 2 × 15m each. Deliberately awkward on purpose; that's the coordination work.",
-      "Ankle rocks and leg swings — 10 each."]},
-     {name:"Change of direction",time:"14 min",items:[
-      "5-10-5 shuttle — 5 reps, full rest between. Get low into the turn and drive out of it. Time your best one each month for the test.",
-      "Sprawl to sprint — 6 × 10m. Down, up, go. The single most sport-specific conditioning drill you own.",
-      "Lateral shuffle with direction change on call — 4 × 20s. Have a partner or a random timer make the call so you react rather than rehearse."]},
-     {name:"Speed & drive",time:"8 min",items:[
-      "10m accelerations — 6 reps, walk back. Low first three steps, then tall.",
-      "Sled push or hill drive — 5 × 15m if you have access. Pure horizontal force."]},
-     {name:"Finisher",time:"6 min",items:[
-      "Bike or rower — 8 × 15s sprint / 45s easy. Short enough to stay a power session.",
-      "Grip: two 30s dead hangs. Cheap insurance for grappling and for your pulling volume."]}
-    ]}
-  ],
-  rules:["Full recovery between power reps — 45–90 seconds. If you are breathing hard, you are conditioning, not building power.","Stop a set the moment output drops. Three fast throws beat eight tired ones.","Run these on lifting rest days, or after a lift on a day you are short of time — never before, or the lift eats the speed.","Total volume is deliberately low. Power adapts fast and burns recovery quickly."]
-};
+var RESTS={legs:"Active Rest day — cardio, hip mobility and light joint work. This sits between your two hardest sessions.",
+           lower:"Active Rest day — cardio, hip mobility and light joint work. Then back to Pull."};
+var FOREARM_TEXT="Unweighted, not logged: right after the last exercise, 2–3 rounds of slow fingertip extensions (spread the fingers wide against light resistance from the other hand) or a 20–30s towel wring each direction. Bodyweight only, so there's nothing to enter here.";
 
 /* ================= MOBILITY — flexibility, built toward splits and head kicks ================= */
 var MOBILITY={
@@ -777,7 +770,7 @@ var MOBILITY={
     "Kneeling hip flexor stretch with an active posterior tilt — 45s per side, squeezing the glute of the rear leg to tuck the pelvis under rather than just leaning forward.",
     "Glute bridge with a pelvic tilt hold — 3 × 10, tuck the pelvis before driving the hips up, hold the top for 2 seconds."]},
    {name:"Shoulders, arms & wrists",tag:"4 min",items:[
-    "Band pass-throughs — 10, as narrow a grip as you can hold without pain.",
+    "PVC pipe or towel pass-throughs — 10, as narrow a grip as you can hold without pain.",
     "Shoulder CARs — 3 per side, slow.",
     "Doorway pec stretch — 45s per side at two different heights.",
     "Lat and triceps overhead stretch — 45s per side.",
@@ -880,22 +873,24 @@ var TESTS=[
  {id:"jump", label:"Standing broad jump",unit:"cm",better:"up",   hint:"Best of three, heels to landing heels"},
  {id:"shut", label:"5-10-5 shuttle",   unit:"s",   better:"down", hint:"Best of three, full rest between"}
 ];
-var SESSION_TYPES={cmb_a:"Combat A",cmb_b:"Combat B",mob:"Mobility",bw:"Bodyweight"};
-
 var ALLEX=(function(){var o=[]; PROGRAM.forEach(function(d){d.ex.forEach(function(x){o.push({x:x,d:d});});}); return o;})();
 function exById(id){for(var i=0;i<ALLEX.length;i++){if(ALLEX[i].x.id===id)return ALLEX[i].x;} return null;}
 
 /* ================= LOGGING ================= */
 function logsFor(id){return DB.logs.filter(function(l){return l.id===id;});}
-function logSet(id,pref){
-  var g=function(p){var e=document.getElementById(p+id);return e?e.value.trim():"";};
-  pref=pref||"";
+/* domId scopes the input elements' DOM ids (e.g. "train_pul_pullup") so the same exercise
+   can have its own log form on more than one tab at once without id collisions — those
+   collisions were why logging only ever worked from whichever tab's markup came first
+   in the document. id (the real exercise id) is always what gets written to storage. */
+function logSet(id,domId){
+  domId=domId||id;
+  var g=function(p){var e=document.getElementById(p+domId);return e?e.value.trim():"";};
   var w=g("w_"),r=g("r_"),s=g("s_"),rir=g("rir_"),n=g("n_");
-  if(!w&&!r){var f=document.getElementById("r_"+id)||document.getElementById("w_"+id);
+  if(!w&&!r){var f=document.getElementById("r_"+domId)||document.getElementById("w_"+domId);
     if(f){f.style.outline="2px solid var(--red)";setTimeout(function(){f.style.outline="";},900);} return;}
   DB.logs.push({ts:Date.now(),id:id,date:today(),w:w,r:r,s:s,rir:rir,n:n});
   save("logs");
-  ["w_","r_","s_","rir_","n_"].forEach(function(p){var e=document.getElementById(p+id);if(e&&p==="n_")e.value="";});
+  ["w_","r_","s_","rir_","n_"].forEach(function(p){var e=document.getElementById(p+domId);if(e&&p==="n_")e.value="";});
   toast("Set logged."); rerender();
 }
 function delLog(ts){
@@ -928,20 +923,21 @@ function histRows(id,limit){
   });
   return box;
 }
-function logInputs(id,labels){
+function logInputs(id,labels,scope){
+  var domId=(scope||"")+id;
   var row=el("div","logrow");
   labels=labels||[["w","Weight"],["r","Reps"],["s","Sets"],["rir","RIR"]];
   labels.forEach(function(p){
     var f=el("div","fi "+p[0]);
     f.appendChild(el("label",null,p[1]));
-    var i=el("input"); i.id=p[0]+"_"+id; i.type="text";
+    var i=el("input"); i.id=p[0]+"_"+domId; i.type="text";
     i.setAttribute("inputmode",p[0]==="n"?"text":"decimal");
     f.appendChild(i); row.appendChild(f);
   });
   var nf=el("div","fi note"); nf.appendChild(el("label",null,"Note"));
-  var ni=el("input"); ni.id="n_"+id; ni.type="text"; ni.placeholder="optional";
+  var ni=el("input"); ni.id="n_"+domId; ni.type="text"; ni.placeholder="optional";
   nf.appendChild(ni); row.appendChild(nf);
-  var b=el("button","btn sm","Log"); b.onclick=function(){logSet(id);};
+  var b=el("button","btn sm","Log"); b.onclick=function(){logSet(id,domId);};
   row.appendChild(b);
   return row;
 }
@@ -961,7 +957,7 @@ function renderTrain(){
     '<span class="sp"></span><button id="tstop">Stop</button>';
   root.appendChild(t);
 
-  var picker=el("div","days");
+  var picker=el("div","days"+(PROGRAM.length>5?" six":""));
   PROGRAM.forEach(function(d){
     var b=el("button",d.key===activeDay?"on":"","<span>"+d.name+"</span><small>"+d.ex.length+" moves</small>");
     b.onclick=function(){activeDay=d.key;renderTrain();window.scrollTo({top:0,behavior:"smooth"});};
@@ -979,14 +975,34 @@ function renderTrain(){
   head.appendChild(el("span","focus",day.focus));
   root.appendChild(head);
 
-  day.ex.filter(function(x){return !DB.hidden[x.id];}).forEach(function(x){ root.appendChild(exCard(x)); });
+  if(day.blocks){
+    day.blocks.forEach(function(b){
+      var bc=el("div","card");
+      var h=el("div"); h.style.display="flex"; h.style.justifyContent="space-between"; h.style.alignItems="baseline";
+      h.appendChild(el("strong","dsp",esc(b.name)));
+      h.appendChild(el("span",null,'<span style="font-size:11px;letter-spacing:.1em;color:var(--ink-3)">'+esc(b.time)+'</span>'));
+      bc.appendChild(h);
+      var ul=el("ul"); b.items.forEach(function(i){ul.appendChild(el("li",null,esc(i)));}); bc.appendChild(ul);
+      root.appendChild(bc);
+    });
+  }
+
+  day.ex.filter(function(x){return !DB.hidden[x.id];}).forEach(function(x){ root.appendChild(exCard(x,{scope:"train_"})); });
 
   (DB.custom[activeDay]||[]).forEach(function(x){
     root.appendChild(exCard(x,{
+      scope:"train_",
       onRemove:function(){removeCustom(activeDay,x.id);},
       onEdit:function(){openExerciseForm(root,activeDay,x);}
     }));
   });
+
+  if(day.forearmNote){
+    var fc=el("div","card");
+    fc.appendChild(el("h3","blk dsp","Forearms"));
+    fc.appendChild(el("p",null,FOREARM_TEXT));
+    root.appendChild(fc);
+  }
 
   var addBtn=el("button","btn ghost full","+ Add an exercise to "+day.name);
   addBtn.style.marginTop="6px";
@@ -1089,7 +1105,7 @@ function exCard(x,opts){
     c.appendChild(vwrap);
   }
 
-  c.appendChild(logInputs(x.id));
+  c.appendChild(logInputs(x.id,null,opts.scope));
   c.appendChild(histRows(x.id,3));
   return c;
 }
@@ -1181,42 +1197,6 @@ function beep(){
   if(navigator.vibrate)try{navigator.vibrate([180,90,180]);}catch(e){}
 }
 
-/* ================= COMBAT ================= */
-function renderCombat(){
-  var root=document.getElementById("t-combat"); root.innerHTML="";
-  root.appendChild(el("p","eyebrow","Two sessions a week · 30–40 min"));
-  root.appendChild(el("h2","sec dsp","Combat"));
-  root.appendChild(el("p","lede",COMBAT.intro));
-
-  COMBAT.sessions.forEach(function(s){
-    var card=el("div","card");
-    card.appendChild(el("span","tape",s.tag));
-    card.appendChild(el("h3","blk dsp",s.name));
-    card.appendChild(el("p",null,esc(s.note)));
-    s.blocks.forEach(function(b){
-      card.appendChild(el("div","rule"));
-      var h=el("div"); h.style.display="flex"; h.style.justifyContent="space-between"; h.style.alignItems="baseline";
-      h.appendChild(el("strong","dsp",esc(b.name)));
-      h.appendChild(el("span",null,'<span style="font-size:11px;letter-spacing:.1em;color:var(--ink-3)">'+esc(b.time)+'</span>'));
-      card.appendChild(h);
-      var ul=el("ul"); b.items.forEach(function(i){ul.appendChild(el("li",null,esc(i)));}); card.appendChild(ul);
-    });
-    var done=doneCount(s.key,thisMonth());
-    var tools=el("div","tools");
-    var btn=el("button","btn","Log this session");
-    btn.onclick=function(){markDone(s.key);};
-    tools.appendChild(btn);
-    tools.appendChild(el("span","hint",done+" logged in "+monthName(thisMonth())));
-    card.appendChild(tools);
-    root.appendChild(card);
-  });
-
-  var rules=el("div","card");
-  rules.appendChild(el("h3","blk dsp","Rules of the session"));
-  var ul=el("ul"); COMBAT.rules.forEach(function(r){ul.appendChild(el("li",null,esc(r)));});
-  rules.appendChild(ul); root.appendChild(rules);
-}
-
 /* ================= MOBILITY ================= */
 function renderMobility(){
   var root=document.getElementById("t-mobility"); root.innerHTML="";
@@ -1241,7 +1221,7 @@ function renderMobility(){
   lh.appendChild(el("h3","blk dsp","Flexibility ladders"));
   lh.appendChild(el("p","lede","Three things get tested, because splits and kick height are the only honest proof that the stretching is working. Log the number at the end of a session while you are still warm."));
   root.appendChild(lh);
-  MOBILITY.ladders.forEach(function(p){ root.appendChild(ladderCard(p,renderMobility)); });
+  MOBILITY.ladders.forEach(function(p){ root.appendChild(ladderCard(p,renderMobility,"mob_")); });
 
   var n=el("div","card");
   n.appendChild(el("h3","blk dsp","How to use it"));
@@ -1255,29 +1235,29 @@ function renderMobility(){
   root.appendChild(n);
 }
 
-/* ================= BODYWEIGHT ================= */
+/* ================= CALISTHENICS ================= */
 function rungOf(key){var v=DB.goals["rung_"+key]; return v==null?0:v;}
-function setRung(key,i,back){DB.goals["rung_"+key]=i; save("goals"); toast("Current rung updated."); (back||renderBody)();}
-function renderBody(){
-  var root=document.getElementById("t-body"); root.innerHTML="";
+function setRung(key,i,back){DB.goals["rung_"+key]=i; save("goals"); toast("Current rung updated."); (back||renderCalisthenics)();}
+function renderCalisthenics(){
+  var root=document.getElementById("t-cali"); root.innerHTML="";
   root.appendChild(el("p","eyebrow","Three sessions a week · floor and furniture"));
-  root.appendChild(el("h2","sec dsp","Bodyweight"));
+  root.appendChild(el("h2","sec dsp","Calisthenics"));
   root.appendChild(el("p","lede",BODYWEIGHT.intro));
 
   var how=el("div","card");
   how.appendChild(el("h3","blk dsp","Running a session"));
   how.appendChild(el("p",null,esc(BODYWEIGHT.howto)));
   var tools=el("div","tools");
-  var b=el("button","btn","Log a bodyweight session");
+  var b=el("button","btn","Log a calisthenics session");
   b.onclick=function(){markDone("bw");};
   tools.appendChild(b);
   tools.appendChild(el("span","hint",doneCount("bw",thisMonth())+" logged in "+monthName(thisMonth())));
   how.appendChild(tools);
   root.appendChild(how);
 
-  BODYWEIGHT.patterns.forEach(function(p){ root.appendChild(ladderCard(p,renderBody)); });
+  BODYWEIGHT.patterns.forEach(function(p){ root.appendChild(ladderCard(p,renderCalisthenics,"cali_")); });
 }
-function ladderCard(p,back){
+function ladderCard(p,back,scope){
     var cur=rungOf(p.key);
     var c=el("div","card");
     c.appendChild(el("h3","blk dsp",esc(p.name)));
@@ -1295,7 +1275,7 @@ function ladderCard(p,back){
         mv.onclick=function(){setRung(p.key,i,back);};
         tier.appendChild(mv);
       }else{
-        tier.appendChild(logInputs(t.id,[["r",p.unit||"Reps / secs"],["s","Sets"]]));
+        tier.appendChild(logInputs(t.id,[["r",p.unit||"Reps / secs"],["s","Sets"]],scope));
         tier.appendChild(histRows(t.id,3));
         var up=el("button","btn sm","Cleared it — move up"); up.style.marginTop="6px";
         up.onclick=function(){setRung(p.key,Math.min(i+1,p.tiers.length-1),back);};
@@ -1346,7 +1326,7 @@ var CORE={
     cues:["Cable at chest height, stand side-on and braced. Press straight out and resist the rotation.","Hold two seconds at full extension. Breathe."],
     bad:["Letting the torso twist toward the stack.","Standing too close so there is no resistance to fight."],
     prog:"Double progression 10→15 per side, then step further from the stack or add load.",
-    why:"Anti-rotation strength is what lets you transmit force from the hips into a strike instead of leaking it through the trunk. Direct carryover to everything in the Combat section."},
+    why:"Anti-rotation strength is what lets you transmit force from the hips into a strike or a throw instead of leaking it through the trunk."},
    {id:"lwr_abwheel",name:"Ab Wheel / Long-Lever Plank",musc:"Anti-extension core",sets:"3",reps:"8–12 or 30–45s",rir:"1–2",rest:"60–75s",tempo:"slow",core:true,
     cues:["Ribs down, glutes squeezed, pelvis tucked. Roll out only as far as you can hold that position.","If the lower back arches, you have gone too far. Shorten the range."],
     bad:["Letting the hips sag and the back arch — that trains the spine, not the abs.","Rolling out fast and using momentum to get back."],
@@ -1355,12 +1335,12 @@ var CORE={
    {id:"core_deadbug",name:"Dead Bug",musc:"Deep core — anti-extension, coordination",sets:"3",reps:"8–10 / side",rir:"1–2",rest:"45–60s",tempo:"slow",core:true,
     cues:["Lower back pinned flat into the floor the entire set. Extend the opposite arm and leg slowly, keeping the ribs down.","Only go as far as you can hold the low back flat — range comes later, not now."],
     bad:["Low back arching off the floor as the leg extends.","Moving fast to get through the reps instead of controlling each one."],
-    prog:"Once the low back stays flat for all reps, extend the leg further, then add a light band or ankle weight.",
+    prog:"Once the low back stays flat for all reps, extend the leg further, then add light ankle weights.",
     why:"Teaches the deep core to brace against limb movement without the spine moving — the same skill that keeps your trunk stiff when someone drives into you."},
    {id:"core_birddog",name:"Bird Dog",musc:"Deep core — anti-rotation, spinal stability",sets:"3",reps:"8–10 / side",rir:"1–2",rest:"45–60s",tempo:"slow",core:true,
     cues:["On all fours, brace before you move. Extend the opposite arm and leg to a dead-flat line without the hips or shoulders rotating.","Hold a beat at full extension, then return with control."],
     bad:["Hips rocking open as the leg lifts.","Arching the low back to get the leg higher."],
-    prog:"Add a 2–3 second hold at extension, then a light band around the working hand and foot.",
+    prog:"Add a 2–3 second hold at extension, then hold a light dumbbell in the working hand.",
     why:"Anti-rotation and anti-extension in one movement, and it carries straight over to staying stable on one base — a stance, a sprawl, a single supporting leg."},
    {id:"core_plank",name:"Front Plank",musc:"Deep core — anti-extension, full brace",sets:"3",reps:"30–60s",rir:"0–1",rest:"45–60s",tempo:"hold",core:true,
     cues:["Forearms down, straight line from shoulders to ankles. Squeeze the glutes and brace the abs like you're about to be hit.","Ribs pulled down, not flared toward the ceiling."],
@@ -1384,21 +1364,21 @@ function renderCore(){
   h2.style.margin="26px 0 10px";
   root.appendChild(h2);
   root.appendChild(el("p","lede","Loaded, visible-muscle training. This is what shows through the skin."));
-  CORE.aesthetic.filter(function(x){return !DB.hidden[x.id];}).forEach(function(x){ root.appendChild(exCard(x)); });
+  CORE.aesthetic.filter(function(x){return !DB.hidden[x.id];}).forEach(function(x){ root.appendChild(exCard(x,{scope:"core_"})); });
 
   var h3e=el("h3","blk dsp","Deep core — brace & anti-movement");
   h3e.style.margin="26px 0 10px";
   root.appendChild(h3e);
   root.appendChild(el("p","lede","Doesn't show in the mirror. This is what keeps the spine safe and lets force transfer through the trunk instead of leaking out of it."));
-  CORE.deep.filter(function(x){return !DB.hidden[x.id];}).forEach(function(x){ root.appendChild(exCard(x)); });
+  CORE.deep.filter(function(x){return !DB.hidden[x.id];}).forEach(function(x){ root.appendChild(exCard(x,{scope:"core_"})); });
 
   var lh=el("div"); lh.style.margin="26px 0 12px";
   lh.appendChild(el("p","eyebrow","Bodyweight progression"));
   lh.appendChild(el("h3","blk dsp","Core calisthenics ladder"));
-  lh.appendChild(el("p","lede","The hollow hold, L-sit and dragon flag progression from Bodyweight, so loaded and unloaded core work live in the same place."));
+  lh.appendChild(el("p","lede","The hollow hold, L-sit and dragon flag progression from Calisthenics, so loaded and unloaded core work live in the same place."));
   root.appendChild(lh);
   var coreLadder=BODYWEIGHT.patterns.filter(function(p){return p.key==="bw_core";})[0];
-  if(coreLadder)root.appendChild(ladderCard(coreLadder,renderCore));
+  if(coreLadder)root.appendChild(ladderCard(coreLadder,renderCore,"coretier_"));
 
   var hc=hiddenRestoreCard("Core",CORE.aesthetic.concat(CORE.deep));
   if(hc)root.appendChild(hc);
@@ -1740,8 +1720,8 @@ function renderMethod(){
   root.appendChild(el("p","lede","Six things drive everything in here. If you only remember one, make it the first."));
   [
    ["Double progression","Every lift has a rep range. Keep the weight fixed and add reps until you hit the top of the range on every prescribed set at the target RIR. Only then add the smallest increment available and drop back to the bottom of the range. Reps first, always — it's the low-risk way to prove you own the load. Worked example: incline dumbbell press at 6–10. Start where you get 6. Climb 6, 7, 8, 9, 10 across weeks. When all four sets hit 10 at RIR 1–2, take the next dumbbell up and restart near 6."],
-   ["Why quads and hamstrings now match","Both sit at 14 hard sets a week. Quads: Smith squat 4 and leg extension 3 on Legs, leg extension 4 and Bulgarian split squat 3 on Lower. Hamstrings: seated curl 4 and Romanian deadlift 4 on Legs, seated curl 3 and standing good morning 3 on Lower. The hamstring sets also split evenly between knee flexion and hip extension at 7 each, because the muscle does two jobs and only training one of them leaves half of it behind."],
-   ["Power is not conditioning","The Combat sessions look short because they are meant to. Explosive work adapts on quality, not accumulation — five hard throws with full recovery build more power than twenty tired ones, which mostly teach your nervous system to move slowly. Stop the set when the speed drops, not when you're out of breath. The conditioning finishers are separate on purpose."],
+   ["Why quads and hamstrings still match","Both sit at 8 hard sets a week. Quads: leg press 2 and leg extension 2 on Legs, leg extension 2 and Bulgarian split squat 2 on Lower. Hamstrings: seated curl 2 and SLDL 2 on Legs, seated curl 2 and SLDL 2 on Lower. The hamstring sets also split evenly between knee flexion and hip extension at 4 each, because the muscle does two jobs and only training one of them leaves half of it behind. Leg, Lower and Upper day are capped at two sets per exercise on purpose — more movements for coverage, not more volume on any one of them."],
+   ["Active rest is not a rest day","The Sunday and Thursday sessions exist because stiff hips and SI joint pain don't fix themselves on the sofa. Light cardio, hip mobility with a pelvic-tilt focus, then easy joint and rotator-cuff work — nothing on that day should ever leave you sore. If it does, the load was wrong for the day, not the day itself."],
    ["Running by time, not distance","Distance rewards going faster than you should. Continuous time rewards the thing you actually want, which is an aerobic base that holds up in round three. Run slow enough to hold the whole rung, clear it twice, then move up. The pace takes care of itself."],
    ["Deload every 5–8 weeks","Or sooner if several lifts stall at once, your joints ache, sleep goes or motivation is on the floor. Keep the same exercises, halve the sets, keep the loads moderate at RIR 3–4, and run it for a week. Then pick the weights back up where you left them. A deload is planned, not lost."],
    ["When a lift stalls","Two or three sessions with no movement, in this order: check sleep, protein and stress first, because most plateaus are recovery. Then micro-load with smaller jumps. Then shift the rep range up for a block. Then tighten the tempo. Then swap for an equivalent variation. Add a set only if you're recovering well, and deload if several lifts stall together."]
@@ -1758,32 +1738,30 @@ function renderMethod(){
     "<li><strong>Mon</strong> Pull · mobility 10 min</li>"+
     "<li><strong>Tue</strong> Push · run</li>"+
     "<li><strong>Wed</strong> Legs</li>"+
-    "<li><strong>Thu</strong> Rest · Combat A · full mobility</li>"+
+    "<li><strong>Thu</strong> Active Rest · core session</li>"+
     "<li><strong>Fri</strong> Upper · run</li>"+
     "<li><strong>Sat</strong> Lower</li>"+
-    "<li><strong>Sun</strong> Rest · Combat B or bodyweight · full mobility</li>"));
-  wk.appendChild(el("p","hint","Bodyweight sessions are short enough to attach to any day. Last day of the month, run the test."));
+    "<li><strong>Sun</strong> Active Rest · core session</li>"));
+  wk.appendChild(el("p","hint","Calisthenics sessions are short enough to attach to any day. Last day of the month, run the test."));
   root.appendChild(wk);
 }
 
 
 /* ================= TODAY ================= */
 var WEEK=[
- {d:"Sun",lift:null,extras:["cmb_b","mob"],note:"Rest from the weights. Combat B or a bodyweight session, then the full flexibility hour."},
+ {d:"Sun",lift:"activerest",extras:["coresession"]},
  {d:"Mon",lift:"pull",extras:["mob10"]},
  {d:"Tue",lift:"push",extras:["run"]},
  {d:"Wed",lift:"legs",extras:[]},
- {d:"Thu",lift:null,extras:["cmb_a","mob"],note:"Rest from the weights. Combat A, then the full flexibility hour while you're warm."},
+ {d:"Thu",lift:"activerest",extras:["coresession"]},
  {d:"Fri",lift:"upper",extras:["run"]},
  {d:"Sat",lift:"lower",extras:[]}
 ];
 var EXTRA_DEF={
- cmb_a:{t:"Combat A",s:"Rotation and throwing power · 30–40 min",tab:"combat",log:"cmb_a"},
- cmb_b:{t:"Combat B",s:"Movement and change of direction · 30–40 min",tab:"combat",log:"cmb_b"},
  mob:{t:"Full flexibility session",s:"Splits, kick height, whole body · 45 min",tab:"mobility",log:"mob"},
  mob10:{t:"Flexibility — short dose",s:"Pick two blocks · 10 min",tab:"mobility",log:"mob"},
  run:{t:"Run",s:"Continuous time, at a pace you can hold",tab:"run",log:null},
- bw:{t:"Bodyweight session",s:"Balance and skill first, while you're fresh",tab:"body",log:"bw"}
+ coresession:{t:"Core session",s:"Pick 2–3 moves from Core, or just hold a plank — the point is logging it, not the list",tab:"core",log:"coresession"}
 };
 function isMonthEnd(){
  var d=new Date(), t=new Date(d.getFullYear(),d.getMonth()+1,0);
@@ -1874,7 +1852,7 @@ function renderToday(){
    t.onclick=function(){q.classList.toggle("open");};
    q.appendChild(t);
    var b=el("div","qr-b");
-   b.appendChild(logInputs(x.id));
+   b.appendChild(logInputs(x.id,null,"today_"));
    b.appendChild(histRows(x.id,3));
    q.appendChild(b);
    root.appendChild(q);
@@ -1910,8 +1888,8 @@ function renderToday(){
 }
 
 /* ================= NAV / INIT ================= */
-var TABS=[["today","Today",renderToday],["train","Train",renderTrain],["core","Core",renderCore],["combat","Combat",renderCombat],["mobility","Flexibility",renderMobility],
-          ["body","Bodyweight",renderBody],["run","Run",renderRun],["progress","Progress",renderProgress],
+var TABS=[["today","Today",renderToday],["train","Train",renderTrain],["core","Core",renderCore],["mobility","Flexibility",renderMobility],
+          ["cali","Calisthenics",renderCalisthenics],["run","Run",renderRun],["progress","Progress",renderProgress],
           ["method","Method",renderMethod]];
 var current="today";
 function rerender(){

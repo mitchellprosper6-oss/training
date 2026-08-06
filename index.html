@@ -366,6 +366,7 @@ h3.blk{margin:0 0 10px; font-size:19px; line-height:1.1}
   <section class="tab on" id="t-today"></section>
   <section class="tab" id="t-train"></section>
   <section class="tab" id="t-core"></section>
+  <section class="tab" id="t-forearm"></section>
   <section class="tab" id="t-mobility"></section>
   <section class="tab" id="t-cali"></section>
   <section class="tab" id="t-run"></section>
@@ -451,7 +452,7 @@ function confirmBox(title,body,okLabel){
 }
 
 /* ================= THE FIVE-DAY SPLIT =================
-   Week: Pull · Push · Legs · rest · Upper · Lower · rest
+   Week: Legs · Push · Pull · rest · Lower · Upper · rest
    Quads and hamstrings are matched at 14 hard sets each per week. */
 var PROGRAM=[
 {key:"pull",name:"Pull",sub:"Back · rear delts · traps · biceps",
@@ -588,48 +589,22 @@ var PROGRAM=[
 ]},
 
 {key:"upper",name:"Upper",sub:"Arms · shoulders · chest · back",
- focus:"Fixed order — biceps, triceps, shoulders, chest, then back. Two hard sets per exercise, everything included.",forearmNote:true,ex:[
+ focus:"One bicep and one triceps exercise to open, then side delts, back, chest, rear delts and front delts — the second bicep and triceps exercise close the day. Two hard sets per exercise, everything included.",forearmNote:true,ex:[
  {id:"upr_ezcurl",name:"EZ Bar Curl",musc:"Biceps",sets:"2",reps:"8–12",rir:"1–2",rest:"90s",tempo:"2-1-2",
   cues:["Standing or seated, elbows pinned to your sides for the whole set. Curl to a full contraction, squeeze a beat.","Control the negative all the way down to a full stretch."],
   bad:["Swinging the torso or the elbows drifting forward to cheat the weight up.","Only doing the top half of the rep."],
   prog:"Double progression 8→12.",
   why:"A straightforward, moderate-stretch-to-full-contraction curl, placed first while your arms are freshest — the EZ bend keeps the wrists comfortable under load."},
- {id:"upr_inclinecurl",name:"Incline Dumbbell Curl",musc:"Biceps — long head",sets:"2",reps:"8–12",rir:"1–2",rest:"90s",tempo:"3-0-1",
-  cues:["Elbows stay behind the torso for the whole set — the stretched position is the entire point.","Supinate hard, full stretch at the bottom, no swinging."],
-  bad:["Letting the elbows drift forward, which kills the stretch.","Half reps and heaving."],
-  prog:"Double progression 8→12.",
-  why:"The behind-the-body angle puts the long head in deep stretch, which is where most of the growth signal lives — complementing the peak-contraction EZ bar curl above."},
  {id:"upr_jm",name:"Smith Machine JM Press",musc:"Triceps — long head under load",sets:"2",reps:"8–12",rir:"1–2",rest:"90s–2 min",tempo:"3-0-1",
   cues:["Lie as for a close-grip bench, hands about shoulder-width. Lower the bar toward the upper chest and throat line while letting the elbows travel forward — halfway between a close-grip press and a skullcrusher.","Stop when the forearms are near the biceps, then drive back up. Keep the elbows in line with the bar path, not flared."],
   bad:["Turning it into a pure close-grip bench by keeping the upper arms vertical.","Letting the bar drift over the face like a skullcrusher, which loads the elbow rather than the muscle.","Going heavy before the groove is learned — this one rewards practice at moderate load."],
   prog:"Double progression 8→12, then add the smallest plate available and reset to 8.",
   why:"Replaces the skullcrusher. You get the same stretched long-head position but the load is shared with a pressing pattern, so the elbows take far less strain — and on a Smith machine the bar path is fixed, so you can push near failure alone and learn the groove safely."},
- {id:"upr_satricep",name:"Single-Arm Triceps Extension",musc:"Triceps — unilateral",sets:"2",reps:"10–15 / arm",rir:"0–1",rest:"75–90s",tempo:"2-0-2",
-  cues:["One handle on a low or high cable (or a single dumbbell overhead), elbow tucked and fixed. Extend to full lockout, squeeze, then control the stretch back.","Keep the elbow pinned in place — it shouldn't travel forward or flare out."],
-  bad:["Elbow drifting to help finish the rep.","Leaning the torso into it instead of isolating the arm."],
-  prog:"Double progression 10→15 per arm, then load.",
-  why:"One arm at a time closes any left-right gap and keeps the elbow honest in a way a two-handed pushdown lets you cheat — a second triceps angle to close out the day's arm work."},
  {id:"upr_lateral",name:"Dumbbell Lateral Raise",musc:"Side delts",sets:"2",reps:"12–20",rir:"0–1",rest:"60–90s",tempo:"2-0-2",
   cues:["Lead with the elbows, control down, no swing. Slight forward lean, constant tension.","Don't rest at the bottom of each rep."],
   bad:["Momentum and traps.","Going above shoulder height."],
   prog:"Double progression 12→20, micro-load.",
   why:"Second weekly side-delt session. Highest return per set for shoulder width and it thrives on frequency."},
- {id:"upr_frontraise",name:"Dumbbell Front Raise",musc:"Delts — front",sets:"2",reps:"12–15",rir:"0–1",rest:"60–75s",tempo:"2-0-2",
-  cues:["Raise to eye level with a soft bend in the elbow, thumbs slightly up.","Control the descent — don't let the dumbbells fall past the front of your thighs."],
-  bad:["Swinging from the hips or shrugging to start the rep.","Raising past shoulder height, which shifts load onto the traps."],
-  prog:"Double progression 12→15, micro-load.",
-  why:"Direct front-delt isolation to round out the shoulder press. The front delt already works hard on every push day, so this stays light and short."},
- {id:"upr_incmachine",name:"Incline Machine / Smith Press",musc:"Chest — upper",sets:"2",reps:"8–12",rir:"1–2",rest:"2 min",tempo:"2-1-2",
-  cues:["Bench around 30°, shoulder blades retracted, press over the upper chest.","Full controlled range."],
-  bad:["Bench too steep.","Half reps, shoulders rolling forward."],
-  prog:"Double progression 8→12.",
-  why:"A second upper-chest session on a stable path so you can push hard this late in the day. Swap to a flat press if mid-chest starts lagging."},
- {id:"upr_midflye",name:"Flat Bench Press or Dumbbell Press",musc:"Chest — mid",sets:"2",reps:"8–12",rir:"1–2",rest:"2–2.5 min",tempo:"2-1-1",
-  variants:["Flat Barbell Bench Press","Flat Dumbbell Press"],
-  cues:["Shoulder blades pinched and pinned, slight arch, feet driven into the floor.","Bar or dumbbells to the mid-chest, elbows around 45–60°, press up and slightly back."],
-  bad:["Elbows flared to 90°, which stresses the shoulder.","Bouncing the weight off the chest."],
-  prog:"Double progression 8→12, then add load and reset.",
-  why:"A second mid-chest session, barbell or dumbbells depending on what you feel like that day — either way it builds raw pressing strength, complementing the two incline-biased presses earlier in the day."},
  {id:"upr_pullup",name:"Single-Arm Lat Pulldown",musc:"Lats — width, unilateral",sets:"2",reps:"8–12 / arm",rir:"1–2",rest:"90s–2 min",tempo:"2-1-1",
   cues:["Single handle, torso tall with a slight lean back. Pull the elbow down and back toward your hip, driving through the lat.","Let the arm reach fully overhead on the return for a real stretch before the next rep."],
   bad:["Twisting the torso to help finish the pull.","Using the bicep to yank instead of driving the elbow down."],
@@ -644,7 +619,38 @@ var PROGRAM=[
   cues:["Chest glued to the pad. Row to the lower ribs and pause a second in the squeeze.","Retract and depress the shoulder blades; elbows around 45°, not flared to 90°."],
   bad:["Jerking with the lower back or legs.","Flaring the elbows so it becomes a rear-delt row.","Cutting the range short at the bottom."],
   prog:"Double progression 8→12, then load.",
-  why:"A second thickness row to close the day, off a different angle to the single-arm cable row above. Rear-delt and rotator-cuff work now live on Pull day's reverse pec-deck and on the Active Rest day instead."}
+  why:"A second thickness row, off a different angle to the single-arm cable row above."},
+ {id:"upr_incmachine",name:"Incline Machine / Smith Press",musc:"Chest — upper",sets:"2",reps:"8–12",rir:"1–2",rest:"2 min",tempo:"2-1-2",
+  cues:["Bench around 30°, shoulder blades retracted, press over the upper chest.","Full controlled range."],
+  bad:["Bench too steep.","Half reps, shoulders rolling forward."],
+  prog:"Double progression 8→12.",
+  why:"A second upper-chest session on a stable path so you can push hard this late in the day. Swap to a flat press if mid-chest starts lagging."},
+ {id:"upr_midflye",name:"Flat Bench Press or Dumbbell Press",musc:"Chest — mid",sets:"2",reps:"8–12",rir:"1–2",rest:"2–2.5 min",tempo:"2-1-1",
+  variants:["Flat Barbell Bench Press","Flat Dumbbell Press"],
+  cues:["Shoulder blades pinched and pinned, slight arch, feet driven into the floor.","Bar or dumbbells to the mid-chest, elbows around 45–60°, press up and slightly back."],
+  bad:["Elbows flared to 90°, which stresses the shoulder.","Bouncing the weight off the chest."],
+  prog:"Double progression 8→12, then add load and reset.",
+  why:"A second mid-chest session, barbell or dumbbells depending on what you feel like that day — either way it builds raw pressing strength, complementing the incline press above."},
+ {id:"upr_reardeltfly",name:"Leaning Rear Delt Fly",musc:"Rear delts",sets:"2",reps:"15–20",rir:"0–1",rest:"60s",tempo:"2-1-1",
+  cues:["Hold a fixed post or machine frame with the free hand and lean away from it, letting the working arm hang free across your body for a deep stretch.","Raise the arm out and back in a fly arc, squeezing the rear delt at the top; control the stretch back down."],
+  bad:["Standing upright instead of leaning away — the lean is what gives the extra range, so don't skip it.","Turning it into a row by bending the elbow and pulling back instead of flying."],
+  prog:"Double progression 15→20, then load.",
+  why:"Leaning away lets the working arm hang clear of the torso, adding range at both ends that a standard bent-over or pec-deck rear delt fly can't reach — a second weekly rear-delt angle to go with Pull day's reverse pec-deck."},
+ {id:"upr_frontraise",name:"Dumbbell Front Raise",musc:"Delts — front",sets:"2",reps:"12–15",rir:"0–1",rest:"60–75s",tempo:"2-0-2",
+  cues:["Raise to eye level with a soft bend in the elbow, thumbs slightly up.","Control the descent — don't let the dumbbells fall past the front of your thighs."],
+  bad:["Swinging from the hips or shrugging to start the rep.","Raising past shoulder height, which shifts load onto the traps."],
+  prog:"Double progression 12→15, micro-load.",
+  why:"Direct front-delt isolation to round out the shoulder press. The front delt already works hard on every push day, so this stays light and short."},
+ {id:"upr_inclinecurl",name:"Incline Dumbbell Curl",musc:"Biceps — long head",sets:"2",reps:"8–12",rir:"1–2",rest:"90s",tempo:"3-0-1",
+  cues:["Elbows stay behind the torso for the whole set — the stretched position is the entire point.","Supinate hard, full stretch at the bottom, no swinging."],
+  bad:["Letting the elbows drift forward, which kills the stretch.","Half reps and heaving."],
+  prog:"Double progression 8→12.",
+  why:"The behind-the-body angle puts the long head in deep stretch, which is where most of the growth signal lives — complementing the peak-contraction EZ bar curl at the top of the day. Placed last since it's the day's second bicep exercise, not because the stretch position needs freshness."},
+ {id:"upr_satricep",name:"Single-Arm Triceps Extension",musc:"Triceps — unilateral",sets:"2",reps:"10–15 / arm",rir:"0–1",rest:"75–90s",tempo:"2-0-2",
+  cues:["One handle on a low or high cable (or a single dumbbell overhead), elbow tucked and fixed. Extend to full lockout, squeeze, then control the stretch back.","Keep the elbow pinned in place — it shouldn't travel forward or flare out."],
+  bad:["Elbow drifting to help finish the rep.","Leaning the torso into it instead of isolating the arm."],
+  prog:"Double progression 10→15 per arm, then load.",
+  why:"One arm at a time closes any left-right gap and keeps the elbow honest in a way a two-handed pushdown lets you cheat — the day's second triceps angle, closing out the arm work."}
 ]},
 
 {key:"lower",name:"Lower",sub:"Quads · hamstrings · calves",
@@ -678,43 +684,58 @@ var PROGRAM=[
 ]},
 
 {key:"activerest",name:"Active Rest",sub:"Cardio · hip mobility · joints & stability · core",
- focus:"Built around the hips and SI joint, not around load. Light steady cardio, hip-mobility work with a pelvic-tilt focus, then light joint, stability and rotator-cuff work before a core finisher. Nothing here should leave you sore.",
+ focus:"Built around the hips and SI joint, not around load. Steady cardio, hip-mobility work with a pelvic-tilt focus, then light joint, stability and rotator-cuff work before a core finisher. Nothing here should leave you sore.",
  blocks:[
-  {name:"Cardio",time:"10–15 min",items:[
-   "Bike, incline walk or rower, easy and steady. Nose-breathing pace — just enough to raise your temperature before the joint work, not a workout in itself."]},
-  {name:"Mobility & stretching — hips first",time:"10–12 min",items:[
+  {name:"Cardio",time:"45 min",items:[
+   "Bike, incline walk, rower or swim — steady and easy, nose-breathing pace throughout. A longer aerobic block on the one day built for joints rather than load."]},
+  {name:"Mobility & stretching — hips first",time:"15–18 min",items:[
    "Supine posterior pelvic tilt — 3 × 10, low back pressed flat into the floor on the exhale, hold 3 seconds. This is the position everything below builds from.",
    "Standing pelvic tilts — 10 slow, rocking through anterior and posterior tilt to find neutral.",
+   "Knee CARs — 3 slow circles per leg, both directions, exploring the full range without forcing it.",
    "90/90 hip switches — 10 slow, freeing internal and external rotation without forcing the end range.",
    "Couch stretch — 60–90s per side, rear shin up a wall, pelvis tucked under. The rear hip flexor is usually what's actually locking the hips up.",
    "Kneeling hip flexor stretch with an active posterior tilt — 45s per side, squeezing the glute of the rear leg to tuck the pelvis rather than just leaning forward.",
+   "Pigeon pose — 60–90s per side, hips square, easing deeper on the exhale. One of the deepest hip-openers you have — go by feel, not depth.",
+   "Jefferson curl — 5 reps, light. Rolling down and back up one vertebra at a time; loaded spinal and hamstring range that makes everything above stick.",
+   "Glute bridge with a pelvic tilt hold — 3 × 10, tuck the pelvis before driving the hips up, hold the top for 2 seconds.",
    "Cat–cow — 10 slow, moving one vertebra at a time.",
+   "Child's pose — 60–90s, hips sat back to the heels, arms reaching long. A reset for the lower back before you move on.",
    "Want more? The full routine lives on the Flexibility tab."]}
  ],ex:[
- {id:"ar_slrdl",name:"Single-Leg Deadlift",musc:"Hip hinge — balance, unilateral, SI-friendly",sets:"2",reps:"8–10 / leg",rir:"3–4",rest:"60s",tempo:"2-1-2",
-  cues:["Bodyweight, or one light dumbbell in the opposite hand. Hinge from the hip, standing leg soft, free leg reaching straight back for balance.","Square the hips to the floor the whole way — this is a balance drill first, a hamstring exercise second."],
+ {id:"ar_slrdl",name:"Single Leg RDL",musc:"Hip hinge — balance, unilateral, SI-friendly",sets:"2",reps:"8–10 / leg",rir:"3–4",rest:"60s",tempo:"2-1-2",
+  cues:["Bodyweight, or one light dumbbell in the opposite hand. Hinge from the hip, standing leg soft, free leg reaching straight back for balance.","Square the hips to the floor the whole way and feel the stretch through the standing-leg hamstring — this is a balance drill first, a hamstring exercise second."],
   bad:["Rushing it — the point is control, not load.","Letting the hips rotate open to fake the range."],
   prog:"Add a light dumbbell once bodyweight is fully controlled, then build reps 8→10.",
-  why:"Trains the hip hinge unilaterally and cheaply, which finds and fixes side-to-side imbalance around the SI joint without ever loading the spine."},
- {id:"ar_sldl",name:"SLDL (light)",musc:"Hamstrings — hip extension, low load",sets:"2",reps:"10–12",rir:"3–4",rest:"60s",tempo:"2-1-2",
-  cues:["Light dumbbells or a light cable, knees soft and fixed. Hinge at the hips until you feel the hamstring stretch, then stand tall.","This is a movement-quality set, not a working set — stop well short of grinding."],
-  bad:["Loading it up — that's what Leg and Lower day are for.","Rounding the lower back to chase more stretch."],
-  prog:"Add reps before you ever add load. This slot stays light on purpose.",
-  why:"A second, low-stakes pass at the hip-hinge pattern to keep it grooved and the hamstrings and glutes doing their share of stabilising the pelvis."},
+  why:"Trains the hip hinge unilaterally and cheaply, which finds and fixes side-to-side imbalance around the SI joint without ever loading the spine. The one hip-hinge slot this day needs — Leg and Lower day already own the heavier bilateral SLDL."},
  {id:"ar_facepull",name:"Face Pull",musc:"Rear delts / rotator cuff",sets:"2",reps:"15–20",rir:"2–3",rest:"60s",tempo:"2-1-1",
   cues:["Light on a cable, rope to the face, pull the hands apart and finish with the thumbs pointing back.","Elbows high, roughly level with the shoulders. Easy weight — this is about the finish position, not the load."],
   bad:["Loading it heavy enough that the finish turns into a shrug.","Pulling low into the chest like a row."],
   prog:"Add reps only. If it ever feels like work, the weight is too heavy for this slot.",
   why:"Rear delts and external rotation, kept light and frequent for shoulder health rather than size — cheap insurance on a day built around joints."},
- {id:"ar_extrot",name:"Rotator Cuff — Side-Lying External Rotation",musc:"Rotator cuff",sets:"2",reps:"12–15 / side",rir:"2–3",rest:"45–60s",tempo:"2-1-2",
-  cues:["Lying on your side, elbow tucked to your ribs and bent 90°. Rotate the forearm up, keeping the elbow pinned to your side.","Light dumbbell or just the hand — range and control matter far more than load here."],
-  bad:["Letting the elbow drift away from the ribs, which turns it into a shoulder raise.","Using enough weight that the shoulder shrugs to help."],
+ {id:"ar_extrot",name:"Cable External Rotation",musc:"Rotator cuff",sets:"2",reps:"12–15 / side",rir:"2–3",rest:"45–60s",tempo:"2-1-2",
+  cues:["Low pulley, elbow tucked to your ribs and bent 90°, upper arm pinned to your side. Rotate the forearm out and across, keeping the elbow fixed in place.","Light weight — the range and control matter far more than the load."],
+  bad:["Letting the elbow drift away from the ribs, which turns it into a row.","Using enough weight that the shoulder or torso helps out."],
   prog:"Add reps before load. This one almost never needs to get heavy.",
-  why:"Direct, isolated work for the small muscles that hold the shoulder in the socket — they get worked hard indirectly all week and rarely get anything directly."}
+  why:"Direct, isolated work for the small muscles that hold the shoulder in the socket — constant cable tension through the rotation makes the elbow easier to keep honest than a dumbbell."},
+ {id:"ar_scap",name:"Scapular Push-Up",musc:"Serratus anterior / scapular control",sets:"2",reps:"10–15",rir:"2–3",rest:"45–60s",tempo:"2-1-2",
+  cues:["Plank or push-up position, arms locked straight. Let the shoulder blades sink together and down, then push the floor away, rounding the upper back — that's the whole rep.","Elbows stay locked the entire time; the movement comes only from the shoulder blades."],
+  bad:["Bending the elbows to fake the range.","Rushing through it — this is a small range done slowly."],
+  prog:"Add reps first, then move from knees to a full plank, then add a slow 2-second hold at the top.",
+  why:"Trains the serratus anterior and scapular control that every pressing and pulling exercise this week depends on, and it costs nothing — bodyweight, small range, joint-friendly."},
+ {id:"ar_deadhang",name:"Dead Hang",musc:"Grip / shoulder decompression",sets:"2",reps:"20–40s",rir:"2–3",rest:"60s",tempo:"hold",
+  cues:["Full hang from a pull-up bar, shoulders relaxed and allowed to stretch, not shrugged up around your ears.","Breathe. Let the grip and the shoulders open up rather than fighting to stay tense."],
+  bad:["Shrugging up to protect the shoulders instead of letting them hang.","Gripping so hard the forearms cramp before the time is up."],
+  prog:"Add time before anything else. Once it's easy past 40s, it's done its job — this isn't meant to get harder forever.",
+  why:"Decompresses the shoulders and spine after a week of pressing and pulling, and it's free grip and shoulder-health work on a day that has room for it."},
+ {id:"ar_backext",name:"Back Extension",musc:"Lower back / spinal erectors — light",sets:"2",reps:"12–15",rir:"2–3",rest:"60s",tempo:"2-1-2",
+  cues:["Hips on the pad of a 45° or Roman chair, feet secured. Lower under control to a flat back, then extend back up to a straight line — don't hyperextend past neutral.","Bodyweight only, or arms crossed over the chest. This is a health set, not a strength one."],
+  bad:["Snapping past neutral at the top — that's lumbar hyperextension, not spinal health.","Using momentum to bounce out of the bottom."],
+  prog:"Add reps only. If it ever needs load to feel like work, that's what Lower day is for, not this.",
+  why:"Keeps the spinal erectors and glutes doing their job of holding the pelvis level, which is exactly what an SI joint under strain needs — light, controlled, and never loaded."}
 ]}
 ];
-var RESTS={legs:"Active Rest day — cardio, hip mobility and light joint work. This sits between your two hardest sessions.",
-           lower:"Active Rest day — cardio, hip mobility and light joint work. Then back to Pull."};
+var RESTS={pull:"Active Rest day — cardio, hip mobility and light joint work. Then Lower closes out the week.",
+           upper:"Active Rest day — cardio, hip mobility and light joint work. Then back to Legs."};
 var FOREARM_TEXT="Unweighted, not logged: right after the last exercise, 2–3 rounds of slow fingertip extensions (spread the fingers wide against light resistance from the other hand) or a 20–30s towel wring each direction. Bodyweight only, so there's nothing to enter here.";
 
 /* ================= MOBILITY — flexibility, built toward splits and head kicks ================= */
@@ -941,7 +962,7 @@ function logInputs(id,labels,scope){
 var activeDay=PROGRAM[0].key;
 function renderTrain(){
   var root=document.getElementById("t-train"); root.innerHTML="";
-  root.appendChild(el("p","eyebrow","Week — pull · push · legs · rest · upper · lower · rest"));
+  root.appendChild(el("p","eyebrow","Week — legs · push · pull · rest · lower · upper · rest"));
   root.appendChild(el("h2","sec dsp","Train"));
   root.appendChild(el("p","lede","Pick the day you're on and it loads. Tap any exercise to open its cues, mistakes and the reason it's in the plan; log each set underneath as you go."));
 
@@ -1349,6 +1370,59 @@ var CORE={
     why:"Trains the core to resist side-bending under real, offset load — the same job it does every time you're off-balance in a scramble."}
   ]
 };
+
+/* ================= FOREARM — grip, wrists, flexors & extensors ================= */
+var FOREARM={
+  intro:"Direct forearm and grip work, in one place — extensors and flexors trained on their own instead of just as ballast at the end of Pull or Upper. Progress on double progression like everything else here. Grip fatigue is real, so this is a good one to run on its own, or right after a lighter day rather than piling it onto a heavy lifting session.",
+  extensor:[
+   {id:"fa_revpreacher",name:"One-Arm Reverse Preacher Curl",musc:"Forearm extensors / brachioradialis",sets:"3",reps:"10–15 / arm",rir:"0–1",rest:"60–75s",tempo:"2-1-2",
+    cues:["Pronated (palm-down) grip, one arm on the preacher pad at a time. Curl to a full contraction at the top, squeeze, then control the stretch back down.","Keep the upper arm pinned to the pad the whole rep — no lifting off to cheat."],
+    bad:["Coming off the pad to help finish the rep.","Using more weight than you can control through the full range."],
+    prog:"Double progression 10→15 per arm, then load.",
+    why:"The preacher pad fixes the elbow and kills any swing, so one arm at a time gets a strict, peak-contraction hit on the extensors and brachioradialis that a two-handed standing reverse curl can't match."},
+   {id:"fa_reversecurl",name:"Reverse Curl",musc:"Forearm extensors",sets:"3",reps:"12–15",rir:"0–1",rest:"60–75s",tempo:"2-0-2",
+    variants:["Dumbbell","Barbell","Cable"],
+    cues:["Pronated grip, wrists neutral to slightly extended. Strict, no swing.","Squeeze at the top and control the way down."],
+    bad:["Flexing the wrist to cheat the weight up.","Going too heavy — form collapses fast here."],
+    prog:"Double progression 12→15.",
+    why:"Trains the extensor side of the forearm so grip and wrists stay balanced against all the flexor-dominant gripping the rest of the week does."},
+   {id:"fa_wristext",name:"Wrist Extension",musc:"Forearm extensors",sets:"3",reps:"15–20",rir:"0–1",rest:"45–60s",tempo:"2-1-2",
+    variants:["Dumbbell","Cable"],
+    cues:["Forearm supported, palm down, wrist off the edge. Lower under control, then extend the back of the hand up toward you.","Small range — don't try to turn it into a bigger movement than the wrist actually has."],
+    bad:["Using the whole forearm or elbow to move the weight instead of just the wrist.","Going heavy enough that the range shrinks to nothing."],
+    prog:"Double progression 15→20.",
+    why:"The extensor-side mirror of the wrist curl below — isolated wrist extension keeps the smaller, usually-neglected muscles on the back of the forearm from lagging behind the flexors."}
+  ],
+  flexor:[
+   {id:"fa_wristcurl",name:"Wrist Curl",musc:"Forearm flexors",sets:"3",reps:"15–20",rir:"0–1",rest:"45–60s",tempo:"2-1-2",
+    variants:["Dumbbell","Cable"],
+    cues:["Forearms supported, wrists off the edge. Let the bar or handle roll to the fingertips for a full stretch, then curl and squeeze.","Controlled throughout — no bouncing."],
+    bad:["Tiny range.","So heavy it only moves an inch."],
+    prog:"Double progression 15→20.",
+    why:"Direct forearm-flexor and grip work, run on its own instead of tacked onto the end of a lifting day."}
+  ]
+};
+function renderForearm(){
+  var root=document.getElementById("t-forearm"); root.innerHTML="";
+  root.appendChild(el("p","eyebrow","Grip · wrists · flexors & extensors"));
+  root.appendChild(el("h2","sec dsp","Forearm"));
+  root.appendChild(el("p","lede",FOREARM.intro));
+
+  var h2=el("h3","blk dsp","Extensors");
+  h2.style.margin="26px 0 10px";
+  root.appendChild(h2);
+  root.appendChild(el("p","lede","The back of the forearm — usually the neglected side, and the one that keeps the wrists and elbows balanced against everything else here."));
+  FOREARM.extensor.filter(function(x){return !DB.hidden[x.id];}).forEach(function(x){ root.appendChild(exCard(x,{scope:"forearm_"})); });
+
+  var h3e=el("h3","blk dsp","Flexors");
+  h3e.style.margin="26px 0 10px";
+  root.appendChild(h3e);
+  root.appendChild(el("p","lede","Grip and gripping strength — the muscles doing the work every time you pull, hang or carry."));
+  FOREARM.flexor.filter(function(x){return !DB.hidden[x.id];}).forEach(function(x){ root.appendChild(exCard(x,{scope:"forearm_"})); });
+
+  var hc=hiddenRestoreCard("Forearm",FOREARM.extensor.concat(FOREARM.flexor));
+  if(hc)root.appendChild(hc);
+}
 function renderCore(){
   var root=document.getElementById("t-core"); root.innerHTML="";
   root.appendChild(el("p","eyebrow","Abs · obliques · the deep brace"));
@@ -1730,12 +1804,12 @@ function renderMethod(){
   wk.appendChild(el("h3","blk dsp","A week that fits"));
   wk.appendChild(el("p",null,"Lifting is the spine of the week and everything else fills the gaps. This is a template, not a rule — the sessions matter more than the days."));
   wk.appendChild(el("ul",null,
-    "<li><strong>Mon</strong> Pull · mobility 10 min</li>"+
+    "<li><strong>Mon</strong> Legs</li>"+
     "<li><strong>Tue</strong> Push · run</li>"+
-    "<li><strong>Wed</strong> Legs</li>"+
+    "<li><strong>Wed</strong> Pull · mobility 10 min</li>"+
     "<li><strong>Thu</strong> Active Rest · core session</li>"+
-    "<li><strong>Fri</strong> Upper · run</li>"+
-    "<li><strong>Sat</strong> Lower</li>"+
+    "<li><strong>Fri</strong> Lower</li>"+
+    "<li><strong>Sat</strong> Upper · run</li>"+
     "<li><strong>Sun</strong> Active Rest · core session</li>"));
   wk.appendChild(el("p","hint","Calisthenics sessions are short enough to attach to any day. Last day of the month, run the test."));
   root.appendChild(wk);
@@ -1745,12 +1819,12 @@ function renderMethod(){
 /* ================= TODAY ================= */
 var WEEK=[
  {d:"Sun",lift:"activerest",extras:["coresession"]},
- {d:"Mon",lift:"pull",extras:["mob10"]},
+ {d:"Mon",lift:"legs",extras:[]},
  {d:"Tue",lift:"push",extras:["run"]},
- {d:"Wed",lift:"legs",extras:[]},
+ {d:"Wed",lift:"pull",extras:["mob10"]},
  {d:"Thu",lift:"activerest",extras:["coresession"]},
- {d:"Fri",lift:"upper",extras:["run"]},
- {d:"Sat",lift:"lower",extras:[]}
+ {d:"Fri",lift:"lower",extras:[]},
+ {d:"Sat",lift:"upper",extras:["run"]}
 ];
 var EXTRA_DEF={
  mob:{t:"Full flexibility session",s:"Splits, kick height, whole body · 45 min",tab:"mobility",log:"mob"},
@@ -1883,7 +1957,7 @@ function renderToday(){
 }
 
 /* ================= NAV / INIT ================= */
-var TABS=[["today","Today",renderToday],["train","Train",renderTrain],["core","Core",renderCore],["mobility","Flexibility",renderMobility],
+var TABS=[["today","Today",renderToday],["train","Train",renderTrain],["core","Core",renderCore],["forearm","Forearm",renderForearm],["mobility","Flexibility",renderMobility],
           ["cali","Calisthenics",renderCalisthenics],["run","Run",renderRun],["progress","Progress",renderProgress],
           ["method","Method",renderMethod]];
 var current="today";
